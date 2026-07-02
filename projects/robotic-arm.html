@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D-Printed Robotic Arm — Abdelwakil Khamsi</title>
+<meta name="description" content="A robotic arm developed from 3DOF to 6DOF with a two-layer ROS + Python control system.">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="../index.html" class="nav-mark">AK<span>/</span>PORTFOLIO</a>
+    <ul class="nav-links">
+      <li><a href="../index.html#projects">PROJECTS</a></li>
+      <li><a href="../resume.pdf">RESUME</a></li>
+      <li><a href="../index.html#contact">CONTACT</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="project-header">
+  <div class="wrap">
+    <div class="eyebrow">FIG. 03 &#8212; personal project</div>
+    <h1>3D-Printed Robotic Arm</h1>
+    <div class="status-row">
+      <span class="dot"></span> Complete &nbsp;&#183;&nbsp; October 2024 &#8212; August 2025
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="title-block">
+    <div class="cell"><div class="label">EVOLUTION</div><div class="value">3DOF &#8594; 5DOF &#8594; 6DOF</div></div>
+    <div class="cell"><div class="label">HIGH-LEVEL</div><div class="value">ROS + MoveIt</div></div>
+    <div class="cell"><div class="label">LOW-LEVEL</div><div class="value">Python</div></div>
+    <div class="cell"><div class="label">FAB</div><div class="value">Consumer 3D printing</div></div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <div class="prose">
+    <div class="media-block">
+      <div class="media-placeholder">
+        <div class="txt">ADD VIDEO<br>arm executing a pose in RViz + hardware side by side</div>
+      </div>
+    </div>
+
+    <p><strong>Overview.</strong> A self-directed robotic arm project, iteratively developed from a 3-degree-of-freedom prototype to a full 6DOF system. The focus throughout was precision, torque, and efficiency &#8212; and doing it on hardware that's cheap to reproduce and reliable on consumer-grade 3D printers.</p>
+  </div>
+
+  <div class="section-head"><span class="fig">01</span><h2>Mechanical design</h2></div>
+  <div class="prose">
+    <div class="media-row">
+      <div class="media-block"><div class="media-placeholder"><div class="txt">ADD PHOTO<br>3DOF version</div></div></div>
+      <div class="media-block"><div class="media-placeholder"><div class="txt">ADD PHOTO<br>6DOF version</div></div></div>
+    </div>
+    <ul>
+      <li>Evolved drive technology across iterations, from planetary gearboxes to hybrid cycloidal&#8211;belt transmissions, trading off precision, torque, and efficiency at each stage.</li>
+      <li>Optimised manufacturability by standardising on off-the-shelf hardware &#8212; 608-2z ball bearings, Nema 17 stepper motors, and standard bolts &#8212; keeping every part low-cost, easy to print, and reliable to reproduce.</li>
+    </ul>
+  </div>
+
+  <div class="section-head"><span class="fig">02</span><h2>Control architecture</h2></div>
+  <div class="prose">
+    <p>The arm runs a two-layer control system, splitting the problem into planning and execution:</p>
+    <ul>
+      <li><strong>High-level:</strong> ROS + MoveIt, running in a VM, generates joint angles from user-defined end-effector poses set in RViz, solved via inverse kinematics.</li>
+      <li><strong>Low-level:</strong> Python control scripts take those joint angles and translate them into real-time stepper motor commands.</li>
+    </ul>
+    <div class="media-block">
+      <div class="media-placeholder">
+        <div class="txt">ADD SCREENSHOT<br>RViz pose planning view</div>
+      </div>
+    </div>
+  </div>
+
+  <a href="../index.html#projects" class="back-link">&#8592; back to projects</a>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <span class="copy">&#169; 2026 Abdelwakil Khamsi</span>
+    <ul class="links">
+      <li><a href="mailto:abdelwakil55khamsi@gmail.com">EMAIL</a></li>
+      <li><a href="https://linkedin.com/in/abdelwakil-khamsi/">LINKEDIN</a></li>
+      <li><a href="https://github.com/your-username">GITHUB</a></li>
+      <li><a href="../resume.pdf">RESUME</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

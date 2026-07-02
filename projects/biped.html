@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bipedal Robot — Abdelwakil Khamsi</title>
+<meta name="description" content="A torque-controlled, dynamically-walking planar bipedal robot built for an MSc dissertation at Bournemouth University.">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="../index.html" class="nav-mark">AK<span>/</span>PORTFOLIO</a>
+    <ul class="nav-links">
+      <li><a href="../index.html#projects">PROJECTS</a></li>
+      <li><a href="../resume.pdf">RESUME</a></li>
+      <li><a href="../index.html#contact">CONTACT</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="project-header">
+  <div class="wrap">
+    <div class="eyebrow">FIG. 01 &#8212; MSc dissertation</div>
+    <h1>Bipedal Robot</h1>
+    <div class="status-row">
+      <span class="dot"></span> In progress &nbsp;&#183;&nbsp; Bournemouth University &nbsp;&#183;&nbsp; February 2026 &#8212; Present
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="title-block">
+    <div class="cell"><div class="label">CLASS</div><div class="value">RABBIT-style planar biped</div></div>
+    <div class="cell"><div class="label">ACTUATORS</div><div class="value">4 (2 hip, 2 knee)</div></div>
+    <div class="cell"><div class="label">FUNDING</div><div class="value">Bournemouth Univ. grant</div></div>
+    <div class="cell"><div class="label">OUTPUT</div><div class="value teal">Manuscript in prep</div></div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <div class="prose">
+    <div class="media-block">
+      <div class="media-placeholder">
+        <div class="txt">ADD VIDEO<br>square-trajectory bench test or hop/walk footage</div>
+      </div>
+    </div>
+
+    <p><strong>Overview.</strong> PiB is a boom-constrained, planar bipedal robot built as my funded MSc dissertation project. It's a five-link, four-actuator system with point-foot geometry, designed to walk on a rotating boom while I develop and validate torque-based dynamic control.</p>
+
+    <p>The project spans the full stack: mechanical design and gear reduction, embedded motor control over CAN bus, kinematic and dynamic modeling, and — eventually — a head-to-head comparison of classical control against reinforcement learning, evaluated in the same simulator for a fair comparison.</p>
+  </div>
+
+  <div class="section-head"><span class="fig">01</span><h2>Hardware</h2></div>
+  <div class="prose">
+    <div class="media-row">
+      <div class="media-block"><div class="media-placeholder"><div class="txt">ADD PHOTO<br>full assembled leg</div></div></div>
+      <div class="media-block"><div class="media-placeholder"><div class="txt">ADD PHOTO<br>ODrive / CAN wiring</div></div></div>
+    </div>
+    <table class="spec-table">
+      <tr><td>Actuators</td><td>T-Motor MN7005 KV115 (14 pole pairs), ODrive S1 controllers, firmware v0.6.12</td></tr>
+      <tr><td>Bus</td><td>CAN @ 1 Mbps via Geschwister Schneider gs_usb adapter, multi-node control of two ODrives</td></tr>
+      <tr><td>Encoders</td><td>CUI AMT21, event-driven RS485 mode</td></tr>
+      <tr><td>Gear reduction</td><td>Hip 5:1, knee 8.666:1 (manually scaled in software &#8212; ODrive S1 v0.6.12 has no native gear_ratio attribute)</td></tr>
+      <tr><td>Compute</td><td>Raspberry Pi over USB-CAN</td></tr>
+    </table>
+  </div>
+
+  <div class="section-head"><span class="fig">02</span><h2>Control</h2></div>
+  <div class="prose">
+    <p>Early bench testing confirmed a core finding that shaped the whole project: position-mode control is enough for static tasks, but insufficient for walking. It reacts without a model of the system, can't handle impacts, and is incompatible with the torque outputs that Hybrid Zero Dynamics (HZD) requires. That result set the direction toward a full torque-based control pipeline.</p>
+    <ul>
+      <li>Implemented and validated a square-trajectory simulation directly on the physical right leg.</li>
+      <li>Tuned compliant, spring-like joint behaviour by lowering <code>pos_gain</code> into the 3&#8211;5 range with proportionally reduced velocity and integrator gains &#8212; and resolved the resulting "spinout detected" faults by raising <code>vel_limit</code> and aligning <code>current_soft_max</code> across joints.</li>
+      <li>Built the URDF kinematic model (four joints, parallelogram-linkage mimic constraints) as the foundation for Pinocchio-based inverse dynamics.</li>
+    </ul>
+  </div>
+
+  <div class="section-head"><span class="fig">03</span><h2>Current status &amp; next steps</h2></div>
+  <div class="prose">
+    <p>Actively working through the trajectory-to-torque pipeline: finalising URDF inertial parameters (tied to the torso CAD), validating against the manipulator equation at rest (G(q) = &#964; as a gravity-compensation sanity check), and moving toward full HZD-based gait generation.</p>
+    <ul>
+      <li>Assemble the robot to the boom and achieve stable circular walking.</li>
+      <li>Implement reinforcement learning in Isaac Lab as a second controller, with sim-to-sim transfer through Gazebo for a fair comparison against the classical baseline.</li>
+      <li>Publish the dissertation manuscript.</li>
+    </ul>
+  </div>
+
+  <a href="../index.html#projects" class="back-link">&#8592; back to projects</a>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <span class="copy">&#169; 2026 Abdelwakil Khamsi</span>
+    <ul class="links">
+      <li><a href="mailto:abdelwakil55khamsi@gmail.com">EMAIL</a></li>
+      <li><a href="https://linkedin.com/in/abdelwakil-khamsi/">LINKEDIN</a></li>
+      <li><a href="https://github.com/your-username">GITHUB</a></li>
+      <li><a href="../resume.pdf">RESUME</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>
