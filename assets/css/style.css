@@ -214,6 +214,11 @@ h2 {
   background: var(--surface);
 }
 .card .media img, .mention .media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* use for images whose aspect ratio doesn't match the crop box
+   (e.g. square CAD renders) so nothing important gets cropped off */
+.card .media.contain, .mention .media.contain { padding: 1.5rem; }
+.card .media.contain img, .mention .media.contain img { object-fit: contain; }
 .media-placeholder {
   width: 100%; height: 100%;
   display: flex;
@@ -384,6 +389,8 @@ h2 {
 }
 .media-block img { width: 100%; height: 100%; object-fit: cover; }
 .media-block .media-placeholder { border: none; }
+.media-block.contain { padding: 1.5rem; }
+.media-block.contain img { object-fit: contain; }
 
 /* stat callouts */
 .stat-row {
