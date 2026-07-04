@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Life Cycle Management Project — Abdelwakil Khamsi</title>
-<meta name="description" content="Quantified life cycle analysis and topology-optimised redesign of a mechanical lifting jack, reducing its carbon footprint by 22%.">
+<title>Life Cycle Management — Abdelwakil Khamsi</title>
 <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -20,58 +19,122 @@
   </div>
 </nav>
 
-<header class="project-header">
+<header class="project-hero">
   <div class="wrap">
-    <div class="eyebrow">FIG. 02 &#8212; MSc coursework</div>
-    <h1>Life Cycle Management Project</h1>
-    <div class="status-row">
-      <span class="dot"></span> Complete &nbsp;&#183;&nbsp; Bournemouth University &nbsp;&#183;&nbsp; September 2025 &#8212; January 2026
-    </div>
+    <a href="../index.html" class="back-link">&#8592; All projects</a>
+    <div class="eyebrow">FIG. 06 — MSC COURSEWORK</div>
+    <h1>Life Cycle Management</h1>
+    <p class="lede">Quantified life cycle analysis and topology-optimised redesign of a Roll-A-Car 740 mechanical lifting jack — reducing its carbon footprint from 560 to 440 kg CO&#8322;, a 22% improvement, while preserving full structural performance.</p>
   </div>
 </header>
 
 <div class="wrap">
-  <div class="title-block">
-    <div class="cell"><div class="label">SUBJECT</div><div class="value">Roll-A-Car 740 jack</div></div>
-    <div class="cell"><div class="label">BASELINE</div><div class="value">560 kg CO&#8322;</div></div>
-    <div class="cell"><div class="label">RESULT</div><div class="value teal">440 kg CO&#8322; (&#8722;22%)</div></div>
-    <div class="cell"><div class="label">TOOLS</div><div class="value">SolidWorks / ANSYS</div></div>
+  <div class="project-meta">
+    <div class="cell">
+      <div class="label">MODULE</div>
+      <div class="value">Life Cycle Management</div>
+    </div>
+    <div class="cell">
+      <div class="label">PERIOD</div>
+      <div class="value">Sep 2025 – Jan 2026</div>
+    </div>
+    <div class="cell">
+      <div class="label">PRODUCT</div>
+      <div class="value">Roll-A-Car 740 Jack</div>
+    </div>
+    <div class="cell">
+      <div class="label">OUTCOME</div>
+      <div class="value teal">22% CO&#8322; reduction</div>
+    </div>
   </div>
 </div>
 
-<main class="wrap">
+<div class="wrap">
+  <div class="project-body">
 
-  <div class="prose">
-    <div class="media-block">
-      <div class="media-placeholder">
-        <div class="txt">ADD IMAGE<br>before/after CAD or topology optimisation result</div>
+    <div class="prose">
+
+      <h2>CONTEXT</h2>
+      <p>The Roll-A-Car 740 is a standard mechanical lifting jack — a mature product with a well-established design. The project brief was to treat it as a case study in environmental redesign: quantify its carbon footprint through a full life cycle analysis, identify the dominant contributors, and then use simulation-driven topology optimisation to reduce them without compromising structural integrity.</p>
+
+      <h2>BASELINE LCA</h2>
+      <p>A full life cycle analysis established a baseline carbon footprint of approximately 560 kg CO₂ across the product's life stages. Material production and primary manufacturing processes emerged as the dominant contributors — the bulk of the embedded carbon is committed at the point of manufacture, not during use or end of life for a product of this type.</p>
+      <p>This finding focused the redesign effort clearly: reducing mass — and therefore material — was the highest-leverage intervention available.</p>
+
+      <div class="media-block">
+        <div class="media-placeholder"><div class="txt">ADD PHOTO<br>LCA breakdown / baseline model in SolidWorks</div></div>
       </div>
+
+      <h2>TOPOLOGY OPTIMISATION</h2>
+      <p>The redesign used topology optimisation in ANSYS, with the objective of minimising material volume subject to the constraint that structural performance — stress distribution and deflection under rated load — remained within the original design envelope. The optimisation was run with a mass retention target of 55–60% of the starting mass, establishing how much material could be removed while maintaining a meaningful safety margin.</p>
+      <p>The topology result identified which internal regions of the structural members carried negligible load and could be hollowed or removed. These regions were then interpreted into a manufacturable SolidWorks redesign — topology optimisation produces organic geometry that requires engineering judgement to translate into a producible part.</p>
+
+      <div class="media-block">
+        <div class="media-placeholder"><div class="txt">ADD PHOTO<br>ANSYS topology optimisation result</div></div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat">
+          <div class="num">560</div>
+          <div class="desc">BASELINE CO&#8322; (kg)</div>
+        </div>
+        <div class="stat">
+          <div class="num">440</div>
+          <div class="desc">REDESIGNED CO&#8322; (kg)</div>
+        </div>
+        <div class="stat">
+          <div class="num">22%</div>
+          <div class="desc">TOTAL REDUCTION</div>
+        </div>
+      </div>
+
+      <h2>STRUCTURAL VALIDATION</h2>
+      <p>Following the topology-informed redesign, a static structural analysis was re-run in ANSYS to confirm that the performance of the redesigned jack was maintained. The simulation verified that maximum stress and deflection under rated load remained within acceptable limits — the mass reduction had not introduced any new critical stress concentration regions or exceeded the original safety margins.</p>
+
+      <div class="media-block">
+        <div class="media-placeholder"><div class="txt">ADD PHOTO<br>structural validation — stress plot on redesigned model</div></div>
+      </div>
+
+      <h2>RESULT</h2>
+      <p>The redesigned jack achieved a total carbon footprint of 440 kg CO₂ — a reduction of approximately 22% from the 560 kg baseline. Because material production is the dominant life cycle stage for this product, the mass reduction from topology optimisation translated almost directly into the final CO₂ improvement.</p>
+
     </div>
 
-    <p><strong>Overview.</strong> A quantified life cycle analysis and redesign of a mechanical lifting jack, aimed at reducing its environmental impact without compromising performance. The project combined LCA methodology with structural simulation to make design decisions on real data rather than intuition.</p>
-  </div>
+    <aside class="sidebar">
+      <div class="sidebar-block">
+        <span class="label">TOOLS &amp; METHODS</span>
+        <div class="tags">
+          <span class="tag">SolidWorks</span>
+          <span class="tag">ANSYS Mechanical</span>
+          <span class="tag">Topology Optimisation</span>
+          <span class="tag">Static Structural FEA</span>
+          <span class="tag">Life Cycle Analysis</span>
+        </div>
+      </div>
+      <div class="sidebar-block">
+        <span class="label">KEY DELIVERABLES</span>
+        <ul>
+          <li>Full LCA with baseline footprint</li>
+          <li>Topology optimisation study</li>
+          <li>Redesigned SolidWorks model</li>
+          <li>Structural validation simulation</li>
+          <li>Quantified CO&#8322; reduction</li>
+        </ul>
+      </div>
+      <div class="sidebar-block">
+        <span class="label">SKILLS DEMONSTRATED</span>
+        <ul>
+          <li>Life cycle analysis methodology</li>
+          <li>ANSYS topology optimisation</li>
+          <li>FEA structural validation</li>
+          <li>Simulation-informed redesign</li>
+          <li>DFM interpretation of opt. results</li>
+        </ul>
+      </div>
+    </aside>
 
-  <div class="section-head"><span class="fig">01</span><h2>Approach</h2></div>
-  <div class="prose">
-    <ul>
-      <li>Established a baseline carbon footprint of around 560 kg CO&#8322; for the existing design, primarily driven by material choice and manufacturing processes.</li>
-      <li>Ran a topology optimisation in ANSYS to identify where material could be removed while preserving 55&#8211;60% of the starting mass.</li>
-      <li>Re-ran a static structural analysis on the optimised geometry to validate that load-bearing performance was maintained post-redesign.</li>
-      <li>Reduced the total carbon footprint to 440 kg CO&#8322; &#8212; an approximate 22% reduction &#8212; through the combined material and process changes.</li>
-    </ul>
   </div>
-
-  <div class="section-head"><span class="fig">02</span><h2>Result</h2></div>
-  <div class="prose">
-    <div class="media-row">
-      <div class="media-block"><div class="media-placeholder"><div class="txt">ADD IMAGE<br>ANSYS stress plot</div></div></div>
-      <div class="media-block"><div class="media-placeholder"><div class="txt">ADD IMAGE<br>final redesigned part</div></div></div>
-    </div>
-    <p>The redesign demonstrates that meaningful carbon reduction doesn't have to come at the cost of structural performance &#8212; the optimised geometry held the same validated load case as the original while using significantly less material.</p>
-  </div>
-
-  <a href="../index.html#projects" class="back-link">&#8592; back to projects</a>
-</main>
+</div>
 
 <footer id="contact">
   <div class="wrap">

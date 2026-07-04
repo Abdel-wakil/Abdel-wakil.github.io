@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>3D-Printed Robotic Arm — Abdelwakil Khamsi</title>
-<meta name="description" content="A robotic arm developed from 3DOF to 6DOF with a two-layer ROS + Python control system.">
 <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -20,65 +19,120 @@
   </div>
 </nav>
 
-<header class="project-header">
+<header class="project-hero">
   <div class="wrap">
-    <div class="eyebrow">FIG. 03 &#8212; personal project</div>
+    <a href="../index.html" class="back-link">&#8592; All projects</a>
+    <div class="eyebrow">FIG. 02 — PERSONAL PROJECT</div>
     <h1>3D-Printed Robotic Arm</h1>
-    <div class="status-row">
-      <span class="dot"></span> Complete &nbsp;&#183;&nbsp; October 2024 &#8212; August 2025
-    </div>
+    <p class="lede">Iteratively developed from a 3DOF concept to a full 6DOF system — evolving the drive technology from planetary gearboxes through hybrid cycloidal-belt transmissions, with a two-layer ROS + Python control architecture.</p>
   </div>
 </header>
 
 <div class="wrap">
-  <div class="title-block">
-    <div class="cell"><div class="label">EVOLUTION</div><div class="value">3DOF &#8594; 5DOF &#8594; 6DOF</div></div>
-    <div class="cell"><div class="label">HIGH-LEVEL</div><div class="value">ROS + MoveIt</div></div>
-    <div class="cell"><div class="label">LOW-LEVEL</div><div class="value">Python</div></div>
-    <div class="cell"><div class="label">FAB</div><div class="value">Consumer 3D printing</div></div>
+  <div class="project-meta">
+    <div class="cell">
+      <div class="label">PERIOD</div>
+      <div class="value">Oct 2024 – Aug 2025</div>
+    </div>
+    <div class="cell">
+      <div class="label">TYPE</div>
+      <div class="value">Personal project</div>
+    </div>
+    <div class="cell">
+      <div class="label">DOF PROGRESSION</div>
+      <div class="value">3 &#8594; 5 &#8594; 6 DOF</div>
+    </div>
+    <div class="cell">
+      <div class="label">DRIVE</div>
+      <div class="value">Cycloidal–belt hybrid</div>
+    </div>
   </div>
 </div>
 
-<main class="wrap">
+<div class="wrap">
+  <div class="project-body">
 
-  <div class="prose">
-    <div class="media-block">
-      <div class="media-placeholder">
-        <div class="txt">ADD VIDEO<br>arm executing a pose in RViz + hardware side by side</div>
+    <div class="prose">
+
+      <h2>WHY BUILD IT</h2>
+      <p>The robotic arm started as a way to build hands-on intuition for the full stack of robotic system development — mechanical design, drive selection, manufacturing, and software integration — without the constraints of an academic brief. The iterative progression from 3DOF to 6DOF was deliberate: each version was a working system that exposed real limitations before the next version addressed them.</p>
+
+      <h2>MECHANICAL EVOLUTION</h2>
+      <p>The first iteration established the basic architecture: a 3DOF shoulder-elbow-wrist chain using planetary gearboxes for torque multiplication at each joint. Planetary drives were chosen initially for their compactness and availability, but in practice the backlash was significant enough to affect end-effector positioning repeatability.</p>
+      <p>By the 5DOF version, the drive strategy had evolved toward hybrid cycloidal-belt transmissions — cycloidal stages for the high-torque shoulder and elbow joints, belt drives for the lighter wrist axes. Cycloidal drives offer dramatically lower backlash than planetaries at comparable reduction ratios, at the cost of more complex geometry to print reliably. Standard 608-2Z ball bearings were used throughout to keep hardware requirements minimal and replaceable.</p>
+      <p>The 6DOF final version refined the structural geometry, tightened the clearances at the cycloidal stages, and standardised on Nema 17 steppers across all joints — selected for their availability, cost, and compatibility with standard motor drivers.</p>
+
+      <div class="media-block">
+        <div class="media-placeholder"><div class="txt">ADD PHOTO<br>3DOF vs 6DOF side by side</div></div>
       </div>
-    </div>
 
-    <p><strong>Overview.</strong> A self-directed robotic arm project, iteratively developed from a 3-degree-of-freedom prototype to a full 6DOF system. The focus throughout was precision, torque, and efficiency &#8212; and doing it on hardware that's cheap to reproduce and reliable on consumer-grade 3D printers.</p>
-  </div>
-
-  <div class="section-head"><span class="fig">01</span><h2>Mechanical design</h2></div>
-  <div class="prose">
-    <div class="media-row">
-      <div class="media-block"><div class="media-placeholder"><div class="txt">ADD PHOTO<br>3DOF version</div></div></div>
-      <div class="media-block"><div class="media-placeholder"><div class="txt">ADD PHOTO<br>6DOF version</div></div></div>
-    </div>
-    <ul>
-      <li>Evolved drive technology across iterations, from planetary gearboxes to hybrid cycloidal&#8211;belt transmissions, trading off precision, torque, and efficiency at each stage.</li>
-      <li>Optimised manufacturability by standardising on off-the-shelf hardware &#8212; 608-2z ball bearings, Nema 17 stepper motors, and standard bolts &#8212; keeping every part low-cost, easy to print, and reliable to reproduce.</li>
-    </ul>
-  </div>
-
-  <div class="section-head"><span class="fig">02</span><h2>Control architecture</h2></div>
-  <div class="prose">
-    <p>The arm runs a two-layer control system, splitting the problem into planning and execution:</p>
-    <ul>
-      <li><strong>High-level:</strong> ROS + MoveIt, running in a VM, generates joint angles from user-defined end-effector poses set in RViz, solved via inverse kinematics.</li>
-      <li><strong>Low-level:</strong> Python control scripts take those joint angles and translate them into real-time stepper motor commands.</li>
-    </ul>
-    <div class="media-block">
-      <div class="media-placeholder">
-        <div class="txt">ADD SCREENSHOT<br>RViz pose planning view</div>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="num">3</div>
+          <div class="desc">DESIGN ITERATIONS</div>
+        </div>
+        <div class="stat">
+          <div class="num">6</div>
+          <div class="desc">FINAL DOF</div>
+        </div>
+        <div class="stat">
+          <div class="num">608-2Z</div>
+          <div class="desc">STANDARD BEARING</div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <a href="../index.html#projects" class="back-link">&#8592; back to projects</a>
-</main>
+      <h2>CONTROL ARCHITECTURE</h2>
+      <p>The control system is split into two layers with a clean interface between them. The high-level layer runs ROS and MoveIt inside a virtual machine: the operator defines target end-effector poses in RViz, and MoveIt's inverse kinematics solver computes the corresponding joint angles [q₁, q₂, q₃, q₄, q₅, q₆]. These joint angles are published as ROS messages.</p>
+      <p>The low-level layer is a Python script running on the physical hardware that subscribes to those joint angle messages and translates them into stepper motor step and direction commands in real time. This separation keeps the motion planning logic entirely in the ROS ecosystem while the hardware interface remains lightweight and responsive.</p>
+
+      <div class="media-block">
+        <div class="media-placeholder"><div class="txt">ADD PHOTO / VIDEO<br>arm following a trajectory in RViz</div></div>
+      </div>
+
+      <h2>MANUFACTURING &amp; DESIGN FOR PRINT</h2>
+      <p>Every structural part was designed to be printable on a consumer-grade FDM printer without supports where possible, and with minimal post-processing. Wall thickness, layer orientation, and infill density were specified per-part based on the loading direction — the cycloidal disc geometry in particular required careful orientation to avoid delamination at the tooth roots.</p>
+      <p>Hardware was standardised deliberately: identical bearings throughout, a single bolt size per joint assembly, and no custom-length fasteners. This made iterating and repairing significantly faster — wrong clearance on a cycloidal stage meant reprinting one disc and reassembling in under an hour.</p>
+
+      <h2>WHAT THIS BUILT TOWARD</h2>
+      <p>The arm project was the direct precursor to the bipedal robot dissertation. It established the working pattern of iterating physical hardware against software requirements, developed familiarity with ROS and motor control, and produced the 3DOF dynamics analysis that became the Robotic Control Design module project. The kinematic and control intuitions developed here transferred directly into the biped's architecture decisions.</p>
+
+    </div>
+
+    <aside class="sidebar">
+      <div class="sidebar-block">
+        <span class="label">HARDWARE</span>
+        <ul>
+          <li>Nema 17 stepper motors (×6)</li>
+          <li>608-2Z ball bearings</li>
+          <li>Cycloidal drive stages</li>
+          <li>Belt drive wrist axes</li>
+          <li>Consumer FDM printed parts</li>
+        </ul>
+      </div>
+      <div class="sidebar-block">
+        <span class="label">SOFTWARE</span>
+        <div class="tags">
+          <span class="tag">ROS</span>
+          <span class="tag">MoveIt</span>
+          <span class="tag">Python</span>
+          <span class="tag">RViz</span>
+          <span class="tag">Inverse Kinematics</span>
+        </div>
+      </div>
+      <div class="sidebar-block">
+        <span class="label">SKILLS DEMONSTRATED</span>
+        <ul>
+          <li>Iterative hardware design</li>
+          <li>Drive selection &amp; backlash analysis</li>
+          <li>Design for FDM manufacture</li>
+          <li>ROS motion planning pipeline</li>
+          <li>Real-time motor control (Python)</li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+</div>
 
 <footer id="contact">
   <div class="wrap">

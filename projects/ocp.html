@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OCP Sulphuric Acid Line — Abdelwakil Khamsi</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="../index.html" class="nav-mark">AK<span>/</span>PORTFOLIO</a>
+    <ul class="nav-links">
+      <li><a href="../index.html#projects">PROJECTS</a></li>
+      <li><a href="../resume.pdf">RESUME</a></li>
+      <li><a href="../index.html#contact">CONTACT</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="project-hero">
+  <div class="wrap">
+    <a href="../index.html" class="back-link">&#8592; All projects</a>
+    <div class="eyebrow">FIG. 04 — MSC THESIS / INDUSTRIAL INTERNSHIP</div>
+    <h1>Sulphuric Acid Production Line</h1>
+    <p class="lede">Root cause analysis, structural simulation, and a redesigned maintenance procedure for a critical heat recovery tower at OCP Group — one of the world's largest phosphate and fertiliser producers. Outcome: 15% increase in line availability.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="project-meta">
+    <div class="cell">
+      <div class="label">ORGANISATION</div>
+      <div class="value">OCP Group, Morocco</div>
+    </div>
+    <div class="cell">
+      <div class="label">PERIOD</div>
+      <div class="value">Feb – May 2023</div>
+    </div>
+    <div class="cell">
+      <div class="label">LINE</div>
+      <div class="value">PS III Sulphuric Acid</div>
+    </div>
+    <div class="cell">
+      <div class="label">OUTCOME</div>
+      <div class="value teal">+15% availability</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="project-body">
+
+    <div class="prose">
+
+      <h2>CONTEXT</h2>
+      <p>OCP Group operates one of the largest sulphuric acid production complexes in the world. The PS III line was experiencing recurring unplanned downtime traced to the Heat Recovery System (HRS) Tower — a large pressure vessel exposed to highly corrosive process conditions. Repeated shell failures were shortening maintenance intervals and dragging down overall line availability.</p>
+      <p>The thesis task was to understand why failures were recurring, model the tower structurally, and design a maintenance procedure that would durably extend intervals between shutdowns.</p>
+
+      <h2>ROOT CAUSE ANALYSIS</h2>
+      <p>Failure investigation began with structured qualitative methods: fishbone diagrams were used to systematically map all potential failure contributors across the categories of material, environment, operating conditions, maintenance practice, and design. The 5 Whys technique was then applied to drill through symptoms to root causes, moving past surface-level answers like "corrosion" to the underlying factors that made the corrosion progress faster than expected.</p>
+      <p>The analysis identified that the primary driver of premature shell failure was localised stress concentration at specific wall regions, exacerbated by thermal cycling and sulphuric acid condensation at those points. This finding directly shaped the simulation scope.</p>
+
+      <div class="media-block">
+        <div class="media-placeholder"><div class="txt">ADD PHOTO<br>fishbone diagram / RCA documentation</div></div>
+      </div>
+
+      <h2>STRUCTURAL SIMULATION</h2>
+      <p>A full 3D model of the HRS Tower was built in SolidWorks using actual wall thickness measurements taken from the vessel. These thickness values — which varied across the shell surface due to differential corrosion — were the critical input: they allowed the simulation to reflect the real degraded state of the tower rather than its original design geometry.</p>
+      <p>The model was imported into ANSYS Mechanical and a static structural analysis was run to evaluate stress distribution under operational loading. The simulation confirmed the locations predicted by the RCA as high-stress zones and quantified the stress concentrations, providing a defensible technical basis for deciding where and how much material was critically degraded.</p>
+
+      <div class="media-block">
+        <div class="media-placeholder"><div class="txt">ADD PHOTO<br>ANSYS stress distribution result</div></div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat">
+          <div class="num">+15%</div>
+          <div class="desc">LINE AVAILABILITY</div>
+        </div>
+        <div class="stat">
+          <div class="num">FEA</div>
+          <div class="desc">STRESS VALIDATED</div>
+        </div>
+        <div class="stat">
+          <div class="num">5W</div>
+          <div class="desc">ROOT CAUSE METHOD</div>
+        </div>
+      </div>
+
+      <h2>SHELL REPLACEMENT PROCEDURE</h2>
+      <p>Combining the simulation results with the RCA findings, a shell replacement procedure was developed and implemented. The procedure defined which sections required replacement versus refurbishment, the sequence of operations to minimise vessel downtime, inspection criteria for accepting or rejecting material, and a monitoring protocol to catch accelerated degradation earlier in future intervals.</p>
+      <p>The procedure was designed around the operational constraints of the plant — it had to be executable within scheduled maintenance windows without requiring additional specialist equipment.</p>
+
+      <h2>RESULT</h2>
+      <p>Integrating the simulation-informed replacement criteria with the optimised maintenance strategy delivered a 15% increase in overall availability of the PS III sulphuric acid line. This was measured against historical availability figures for the same line over comparable operating periods.</p>
+
+      <div class="media-block">
+        <div class="media-placeholder"><div class="txt">ADD PHOTO<br>HRS tower or plant view</div></div>
+      </div>
+
+      <h2>WHAT I LEARNED</h2>
+      <p>This project taught me that simulation is most valuable when it's grounded in real measurement data — using actual wall thickness values rather than nominal design dimensions made the ANSYS results credible and actionable. It also reinforced that a good maintenance procedure is engineering work, not documentation work: the sequencing and criteria decisions require the same rigour as the design decisions that preceded them.</p>
+
+    </div>
+
+    <aside class="sidebar">
+      <div class="sidebar-block">
+        <span class="label">TOOLS &amp; METHODS</span>
+        <div class="tags">
+          <span class="tag">SolidWorks</span>
+          <span class="tag">ANSYS Mechanical</span>
+          <span class="tag">FEA</span>
+          <span class="tag">Fishbone Diagram</span>
+          <span class="tag">5 Whys</span>
+          <span class="tag">Static Structural</span>
+        </div>
+      </div>
+      <div class="sidebar-block">
+        <span class="label">KEY DELIVERABLES</span>
+        <ul>
+          <li>Root cause analysis report</li>
+          <li>Full 3D SolidWorks tower model</li>
+          <li>ANSYS stress simulation</li>
+          <li>Shell replacement procedure</li>
+          <li>MSc thesis (Agadir, 2023)</li>
+        </ul>
+      </div>
+      <div class="sidebar-block">
+        <span class="label">INDUSTRY</span>
+        <p>OCP Group is one of the world's largest producers of phosphate rock and phosphate-based fertilisers, operating large-scale chemical processing plants across Morocco.</p>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <span class="copy">&#169; 2026 Abdelwakil Khamsi</span>
+    <ul class="links">
+      <li><a href="mailto:abdelwakil55khamsi@gmail.com">EMAIL</a></li>
+      <li><a href="https://linkedin.com/in/abdelwakil-khamsi/">LINKEDIN</a></li>
+      <li><a href="https://github.com/your-username">GITHUB</a></li>
+      <li><a href="../resume.pdf">RESUME</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>
