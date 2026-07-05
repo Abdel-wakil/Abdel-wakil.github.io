@@ -219,6 +219,11 @@ h2 {
    (e.g. square CAD renders) so nothing important gets cropped off */
 .card .media.contain, .mention .media.contain { padding: 1.5rem; }
 .card .media.contain img, .mention .media.contain img { object-fit: contain; }
+
+/* use when the box's aspect-ratio is set inline to match the image's
+   own dimensions — fills the box completely with zero crop/letterbox */
+.card .media.fit, .mention .media.fit { padding: 0; }
+.card .media.fit img, .mention .media.fit img { object-fit: cover; }
 .media-placeholder {
   width: 100%; height: 100%;
   display: flex;
@@ -391,6 +396,8 @@ h2 {
 .media-block .media-placeholder { border: none; }
 .media-block.contain { padding: 1.5rem; }
 .media-block.contain img { object-fit: contain; }
+.media-block.fit { padding: 0; }
+.media-block.fit img { object-fit: cover; }
 
 /* stat callouts */
 .stat-row {
