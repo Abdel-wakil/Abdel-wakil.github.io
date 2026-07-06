@@ -57,13 +57,17 @@
       <h2>WHY BUILD IT</h2>
       <p>The robotic arm started as a way to build hands-on intuition for the full stack of robotic system development — mechanical design, drive selection, manufacturing, and software integration — without the constraints of an academic brief. The iterative progression from 3DOF to 6DOF was deliberate: each version was a working system that exposed real limitations before the next version addressed them.</p>
 
+      <div class="media-block fit" style="aspect-ratio: 1066 / 1600;">
+        <img src="../assets/img/robotic-arm/Iso_view_of_the_3D_printed_6DOF_arm.jpeg" alt="Finished 3D-printed 6DOF robotic arm — isometric view" loading="lazy">
+      </div>
+
       <h2>MECHANICAL EVOLUTION</h2>
       <p>The first iteration established the basic architecture: a 3DOF shoulder-elbow-wrist chain using planetary gearboxes for torque multiplication at each joint. Planetary drives were chosen initially for their compactness and availability, but in practice the backlash was significant enough to affect end-effector positioning repeatability.</p>
       <p>By the 5DOF version, the drive strategy had evolved toward hybrid cycloidal-belt transmissions — cycloidal stages for the high-torque shoulder and elbow joints, belt drives for the lighter wrist axes. Cycloidal drives offer dramatically lower backlash than planetaries at comparable reduction ratios, at the cost of more complex geometry to print reliably. Standard 608-2Z ball bearings were used throughout to keep hardware requirements minimal and replaceable.</p>
       <p>The 6DOF final version refined the structural geometry, tightened the clearances at the cycloidal stages, and standardised on Nema 17 steppers across all joints — selected for their availability, cost, and compatibility with standard motor drivers.</p>
 
-      <div class="media-block">
-        <div class="media-placeholder"><div class="txt">ADD PHOTO<br>3DOF vs 6DOF side by side</div></div>
+      <div class="media-block fit" style="aspect-ratio: 842 / 1096;">
+        <img src="../assets/img/robotic-arm/iso_view_cropped.png" alt="6DOF robotic arm — CAD isometric render" loading="lazy">
       </div>
 
       <div class="stat-row">
@@ -91,7 +95,16 @@
 
       <h2>MANUFACTURING &amp; DESIGN FOR PRINT</h2>
       <p>Every structural part was designed to be printable on a consumer-grade FDM printer without supports where possible, and with minimal post-processing. Wall thickness, layer orientation, and infill density were specified per-part based on the loading direction — the cycloidal disc geometry in particular required careful orientation to avoid delamination at the tooth roots.</p>
+
+      <div class="media-block fit" style="aspect-ratio: 1436 / 1162;">
+        <img src="../assets/img/robotic-arm/Section_view_of_3D_model_showing_cicloidal_drive.png" alt="CAD section view of the cycloidal drive mechanism" loading="lazy">
+      </div>
+
       <p>Hardware was standardised deliberately: identical bearings throughout, a single bolt size per joint assembly, and no custom-length fasteners. This made iterating and repairing significantly faster — wrong clearance on a cycloidal stage meant reprinting one disc and reassembling in under an hour.</p>
+
+      <div class="media-block fit" style="aspect-ratio: 1066 / 1600;">
+        <img src="../assets/img/robotic-arm/Side_view_of_the_3D_printed_6DOF_arm.jpeg" alt="Finished 3D-printed 6DOF robotic arm — side view showing the belt and pulley drive mechanism" loading="lazy">
+      </div>
 
       <h2>WHAT THIS BUILT TOWARD</h2>
       <p>The arm project was the direct precursor to the bipedal robot dissertation. It established the working pattern of iterating physical hardware against software requirements, developed familiarity with ROS and motor control, and produced the 3DOF dynamics analysis that became the Robotic Control Design module project. The kinematic and control intuitions developed here transferred directly into the biped's architecture decisions.</p>

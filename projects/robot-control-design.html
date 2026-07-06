@@ -96,16 +96,24 @@
       <p>The full 3D CAD model was imported into MATLAB Simscape, with each component assigned material properties so that Simscape could automatically compute mass, centre of gravity, and inertia tensors. This approach captures the Coriolis effects that the linearised model ignores, giving a physically representative simulation environment.</p>
       <p>A square trajectory in the XY plane was defined using the signal editor and fed into an inverse kinematics block to generate joint-space references [q₁d, q₂d, q₃d]. Three independent PID controllers — one per joint — generated the torque commands to track these references in closed loop. PID gains were tuned using MATLAB's automated tuner targeting a 0.005 s response time to minimise phase lag during continuous path tracking.</p>
 
-      <div class="media-block">
-        <div class="media-placeholder"><div class="txt">ADD PHOTO<br>Simscape robot tree / global Simulink programme</div></div>
+      <div class="media-block fit" style="aspect-ratio: 1548 / 495;">
+        <img src="../assets/img/robot-control-design/matlab_tree.png" alt="Global Simulink programme — trajectory planner, inverse kinematics, PID control loop, forward kinematics, and tracking plot" loading="lazy">
+      </div>
+
+      <div class="media-block fit" style="aspect-ratio: 1642 / 407;">
+        <img src="../assets/img/robot-control-design/simscape_matlab.png" alt="Simscape multibody robot tree — base, shoulder, elbow, forearm, wrist, and hand joint blocks" loading="lazy">
+      </div>
+
+      <div class="media-block fit" style="aspect-ratio: 1064 / 634;">
+        <img src="../assets/img/robot-control-design/Dynamic_control.png" alt="Robot and PID control loop subsystem — three independent PID controllers driving the Simscape robot block" loading="lazy">
       </div>
 
       <h2>RESULTS</h2>
       <p>The simulation confirmed the manipulator successfully reproduced the square trajectory geometry. During straight-line segments, all three PID controllers maintained stable, responsive tracking. The critical test regions were the four corners — points of abrupt directional change requiring rapid torque adjustment to overcome inertia.</p>
       <p>Analysis of corner 3 (reached at t = 1.105 s) showed the maximum Cartesian tracking error during the transient phase was 7×10⁻⁴ m, converging rapidly to a steady-state error of 3.3×10⁻⁵ m. Joint-space analysis identified the base joint (Joint 1) as the primary contributor to corner overshoot, due to its influence on end-effector orientation in the horizontal plane.</p>
 
-      <div class="media-block">
-        <div class="media-placeholder"><div class="txt">ADD PHOTO<br>end-effector trajectory plot / tracking error over time</div></div>
+      <div class="media-block fit" style="aspect-ratio: 693 / 503;">
+        <img src="../assets/img/robot-control-design/desired_vs_actual_path.png" alt="End-effector Cartesian trajectory — desired path vs. actual tracked path" loading="lazy">
       </div>
 
       <h2>WHAT I LEARNED</h2>
