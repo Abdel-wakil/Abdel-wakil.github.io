@@ -58,16 +58,16 @@
       <p>PiB is a five-link, four-actuator planar bipedal robot constrained to move in a vertical plane via a boom. Its architecture matches the canonical RABBIT platform from academic literature — a point-foot, underactuated biped with one passive degree of freedom per step. This is not a coincidence: RABBIT is the platform on which Hybrid Zero Dynamics (HZD) was developed and validated, and the decision to match it unlocks direct access to that control theory lineage.</p>
       <p>The project spans mechanical design, electronics integration, simulation, and locomotion control, with the end goal of demonstrating dynamic circular walking on the boom and comparing HZD-based classical control against reinforcement learning under shared metrics.</p>
 
-      <div class="media-block">
-        <div class="media-placeholder"><div class="txt">ADD PHOTO / VIDEO<br>full robot assembled on boom</div></div>
+      <div class="media-block fit" style="aspect-ratio: 2259 / 1145;">
+        <img src="../assets/img/biped/full_screen_iso_cropped.png" alt="PiB bipedal robot — full isometric CAD view of the torso and legs" loading="lazy">
       </div>
 
       <h2>MECHANICAL DESIGN</h2>
       <p>The leg geometry uses a five-link parallelogram mechanism — thigh, shank, and a mirrored set of passive links that form the closed kinematic chain. The hip and knee joints on each leg are independently actuated. All structural components are 3D printed, with motor mounts and joint interfaces designed to meet stiffness requirements under walking loads while minimising leg mass.</p>
       <p>Motor placement at the knee is proximal (motor body near the hip) to reduce the leg's distal inertia and keep the mass distribution favourable for swing dynamics — a decision informed directly by the RABBIT literature.</p>
 
-      <div class="media-block fit" style="aspect-ratio: 882 / 938;">
-        <img src="../assets/img/biped/iso.png" alt="PiB bipedal robot — isometric CAD render showing the five-link parallelogram leg mechanism" loading="lazy">
+      <div class="media-block fit" style="aspect-ratio: 2259 / 1145;">
+        <img src="../assets/img/biped/Section_view_cropped.png" alt="PiB bipedal robot — CAD section view showing the five-link parallelogram leg mechanism and internal torso components" loading="lazy">
       </div>
 
       <h2>ELECTRONICS &amp; ACTUATION</h2>
@@ -98,8 +98,8 @@
       <p>The URDF models the full five-link geometry including parallelogram mimic constraints, with each T-Motor modelled as a separate inertial link. Gazebo Harmonic provides the physics simulation environment, with <code style="font-family:monospace;color:var(--teal)">ros2_control</code> as the hardware abstraction layer — the same controller code runs in simulation and on hardware by swapping the interface plugin.</p>
       <p>Pinocchio handles all dynamics mathematics: inverse kinematics, inverse dynamics for torque computation, and will serve as the dynamics model inside the trajectory optimiser for HZD.</p>
 
-      <div class="media-block">
-        <div class="media-placeholder"><div class="txt">ADD PHOTO<br>Gazebo simulation / URDF visualisation in RViz</div></div>
+      <div class="media-block fit" style="aspect-ratio: 1179 / 1097;">
+        <img src="../assets/img/biped/rviz_cropped.png" alt="PiB bipedal robot — URDF visualisation in RViz" loading="lazy">
       </div>
 
       <h2>CONTROL STRATEGY</h2>
