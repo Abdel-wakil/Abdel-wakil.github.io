@@ -221,7 +221,7 @@ h2 {
 .card .media.contain img, .mention .media.contain img { object-fit: contain; }
 
 /* use when the box's aspect-ratio is set inline to match the image's
-   own dimensions — fills the box completely with zero crop/letterbox */
+   own dimensions: fills the box completely with zero crop/letterbox */
 .card .media.fit, .mention .media.fit { padding: 0; }
 .card .media.fit img, .mention .media.fit img { object-fit: cover; }
 .media-placeholder {
@@ -377,7 +377,7 @@ h2 {
   position: relative;
 }
 .prose ul li::before {
-  content: '—';
+  content: '•';
   position: absolute;
   left: 0;
   color: var(--teal-dim);

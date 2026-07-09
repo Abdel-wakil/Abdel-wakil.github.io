@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3-DOF Manipulator Dynamics &amp; Control — Abdelwakil Khamsi</title>
+<title>3-DOF Manipulator Dynamics &amp; Control · Abdelwakil Khamsi</title>
 <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -22,9 +22,9 @@
 <header class="project-hero">
   <div class="wrap">
     <a href="../index.html" class="back-link">&#8592; All projects</a>
-    <div class="eyebrow">FIG. 03 — MSC COURSEWORK · ROBOTIC CONTROL DESIGN</div>
+    <div class="eyebrow">FIG. 03 · MSC COURSEWORK · ROBOTIC CONTROL DESIGN</div>
     <h1>3-DOF Manipulator:<br>Dynamics &amp; Control</h1>
-    <p class="lede">Complete dynamic modelling, stability analysis, and simulation of a custom 3-DOF robotic manipulator — from Lagrangian derivation and Jacobian linearisation through to MATLAB Simscape PID trajectory tracking with quantified sub-millimetre performance.</p>
+    <p class="lede">Complete dynamic modelling, stability analysis, and simulation of a custom 3-DOF robotic manipulator, from Lagrangian derivation and Jacobian linearisation through to MATLAB Simscape PID trajectory tracking with quantified sub-millimetre performance.</p>
   </div>
 </header>
 
@@ -55,7 +55,7 @@
     <div class="prose">
 
       <h2>OVERVIEW</h2>
-      <p>This project derived and implemented the complete control pipeline for a 3-DOF articulated manipulator — a constrained version of a custom 6-DOF robotic arm design. The goal was to build the full mathematical model from first principles, expose the limitations of linear analysis, and validate the system through Simscape simulation with PID trajectory control.</p>
+      <p>This project derived and implemented the complete control pipeline for a 3-DOF articulated manipulator, a constrained version of a custom 6-DOF robotic arm design. The goal was to build the full mathematical model from first principles, expose the limitations of linear analysis, and validate the system through Simscape simulation with PID trajectory control.</p>
       <p>The manipulator has three active joints: a base joint rotating about the vertical axis and shoulder and elbow joints rotating in the vertical plane, structurally similar to a simplified PUMA 560 configuration.</p>
 
       <h2>LAGRANGIAN DYNAMICS DERIVATION</h2>
@@ -70,11 +70,11 @@
       </div>
 
       <h2>JACOBIAN LINEARISATION &amp; LOCAL STABILITY</h2>
-      <p>The nonlinear state-space model was linearised around a worst-case operating point — the arm fully extended horizontally — using a first-order Taylor series expansion. This produced the standard LTI form Δẋ = AΔx + BΔu, from which the MIMO transfer function matrix G(s) was derived.</p>
+      <p>The nonlinear state-space model was linearised around a worst-case operating point (the arm fully extended horizontally) using a first-order Taylor series expansion. This produced the standard LTI form Δẋ = AΔx + BΔu, from which the MIMO transfer function matrix G(s) was derived.</p>
       <p>The resulting 3×3 transfer function matrix revealed important structural information: the base joint is dynamically decoupled from the shoulder and elbow in this configuration (zero off-diagonal entries in the first row and column), while G₂₃ and G₃₂ capture cross-coupling between the two vertical-plane joints. All plants take the form 1/s², confirming the marginally stable character of the uncompensated system.</p>
 
       <h2>LYAPUNOV STABILITY ANALYSIS</h2>
-      <p>A key result of the linearisation is its fundamental limitation: the A matrix is evaluated at q̇₀ = 0, which mathematically erases the entire Coriolis matrix — a velocity-dependent term. The resulting linear model is blind to inertial coupling forces generated during motion, making it strictly valid only in the vicinity of the operating point.</p>
+      <p>A key result of the linearisation is its fundamental limitation: the A matrix is evaluated at q̇₀ = 0, which mathematically erases the entire Coriolis matrix, a velocity-dependent term. The resulting linear model is blind to inertial coupling forces generated during motion, making it strictly valid only in the vicinity of the operating point.</p>
       <p>Lyapunov stability theory provides the correct framework for global analysis. A candidate energy-like Lyapunov function was constructed from the tracking error e = q_d − q, and the condition V̇ < 0 was examined. This motivates advanced controllers such as computed torque control, which explicitly compensate for the full nonlinear dynamics across the workspace rather than only near a fixed point.</p>
 
       <div class="stat-row">
@@ -94,30 +94,30 @@
 
       <h2>SIMSCAPE SIMULATION &amp; PID CONTROL</h2>
       <p>The full 3D CAD model was imported into MATLAB Simscape, with each component assigned material properties so that Simscape could automatically compute mass, centre of gravity, and inertia tensors. This approach captures the Coriolis effects that the linearised model ignores, giving a physically representative simulation environment.</p>
-      <p>A square trajectory in the XY plane was defined using the signal editor and fed into an inverse kinematics block to generate joint-space references [q₁d, q₂d, q₃d]. Three independent PID controllers — one per joint — generated the torque commands to track these references in closed loop. PID gains were tuned using MATLAB's automated tuner targeting a 0.005 s response time to minimise phase lag during continuous path tracking.</p>
+      <p>A square trajectory in the XY plane was defined using the signal editor and fed into an inverse kinematics block to generate joint-space references [q₁d, q₂d, q₃d]. Three independent PID controllers, one per joint, generated the torque commands to track these references in closed loop. PID gains were tuned using MATLAB's automated tuner targeting a 0.005 s response time to minimise phase lag during continuous path tracking.</p>
 
       <div class="media-block fit" style="aspect-ratio: 1548 / 495;">
-        <img src="../assets/img/robot-control-design/matlab_tree.png" alt="Global Simulink programme — trajectory planner, inverse kinematics, PID control loop, forward kinematics, and tracking plot" loading="lazy">
+        <img src="../assets/img/robot-control-design/matlab_tree.png" alt="Global Simulink programme: trajectory planner, inverse kinematics, PID control loop, forward kinematics, and tracking plot" loading="lazy">
       </div>
 
       <div class="media-block fit" style="aspect-ratio: 1642 / 407;">
-        <img src="../assets/img/robot-control-design/simscape_matlab.png" alt="Simscape multibody robot tree — base, shoulder, elbow, forearm, wrist, and hand joint blocks" loading="lazy">
+        <img src="../assets/img/robot-control-design/simscape_matlab.png" alt="Simscape multibody robot tree: base, shoulder, elbow, forearm, wrist, and hand joint blocks" loading="lazy">
       </div>
 
       <div class="media-block fit" style="aspect-ratio: 1064 / 634;">
-        <img src="../assets/img/robot-control-design/Dynamic_control.png" alt="Robot and PID control loop subsystem — three independent PID controllers driving the Simscape robot block" loading="lazy">
+        <img src="../assets/img/robot-control-design/Dynamic_control.png" alt="Robot and PID control loop subsystem: three independent PID controllers driving the Simscape robot block" loading="lazy">
       </div>
 
       <h2>RESULTS</h2>
-      <p>The simulation confirmed the manipulator successfully reproduced the square trajectory geometry. During straight-line segments, all three PID controllers maintained stable, responsive tracking. The critical test regions were the four corners — points of abrupt directional change requiring rapid torque adjustment to overcome inertia.</p>
+      <p>The simulation confirmed the manipulator successfully reproduced the square trajectory geometry. During straight-line segments, all three PID controllers maintained stable, responsive tracking. The critical test regions were the four corners: points of abrupt directional change requiring rapid torque adjustment to overcome inertia.</p>
       <p>Analysis of corner 3 (reached at t = 1.105 s) showed the maximum Cartesian tracking error during the transient phase was 7×10⁻⁴ m, converging rapidly to a steady-state error of 3.3×10⁻⁵ m. Joint-space analysis identified the base joint (Joint 1) as the primary contributor to corner overshoot, due to its influence on end-effector orientation in the horizontal plane.</p>
 
       <div class="media-block fit" style="aspect-ratio: 693 / 503;">
-        <img src="../assets/img/robot-control-design/desired_vs_actual_path.png" alt="End-effector Cartesian trajectory — desired path vs. actual tracked path" loading="lazy">
+        <img src="../assets/img/robot-control-design/desired_vs_actual_path.png" alt="End-effector Cartesian trajectory: desired path vs. actual tracked path" loading="lazy">
       </div>
 
       <h2>WHAT I LEARNED</h2>
-      <p>The project made the gap between linear and nonlinear control concrete: the same system that looks stable in the frequency domain (all poles at origin, marginally stable) behaves differently during continuous motion because the linearisation actively erases the coupling terms. Simscape exposed this — the corners were harder than the straights precisely because that's where velocity-dependent forces peak. The natural next step is gain scheduling or computed torque control, and understanding exactly why is the most useful outcome of the analysis.</p>
+      <p>The project made the gap between linear and nonlinear control concrete: the same system that looks stable in the frequency domain (all poles at origin, marginally stable) behaves differently during continuous motion because the linearisation actively erases the coupling terms. Simscape exposed this: the corners were harder than the straights precisely because that's where velocity-dependent forces peak. The natural next step is gain scheduling or computed torque control, and understanding exactly why is the most useful outcome of the analysis.</p>
 
     </div>
 

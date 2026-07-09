@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PiB — Abdelwakil Khamsi</title>
+<title>PiB · Abdelwakil Khamsi</title>
 <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -22,7 +22,7 @@
 <header class="project-hero">
   <div class="wrap">
     <a href="../index.html" class="back-link">&#8592; All projects</a>
-    <div class="eyebrow">FIG. 01 — MSC DISSERTATION · IN PROGRESS</div>
+    <div class="eyebrow">FIG. 01 · MSC DISSERTATION · IN PROGRESS</div>
     <h1>PiB</h1>
     <p class="lede">A RABBIT-class, five-link, four-actuator boom-constrained bipedal robot built for my MSc dissertation. Custom mechanical design, full ROS2 software stack, ODrive/CAN torque actuation, and a dual classical/RL control pipeline targeting dynamic walking.</p>
   </div>
@@ -55,19 +55,19 @@
     <div class="prose">
 
       <h2>WHAT IS PiB</h2>
-      <p>PiB is a five-link, four-actuator planar bipedal robot constrained to move in a vertical plane via a boom. Its architecture matches the canonical RABBIT platform from academic literature — a point-foot, underactuated biped with one passive degree of freedom per step. This is not a coincidence: RABBIT is the platform on which Hybrid Zero Dynamics (HZD) was developed and validated, and the decision to match it unlocks direct access to that control theory lineage.</p>
+      <p>PiB is a five-link, four-actuator planar bipedal robot constrained to move in a vertical plane via a boom. Its architecture matches the canonical RABBIT platform from academic literature: a point-foot, underactuated biped with one passive degree of freedom per step. This is not a coincidence: RABBIT is the platform on which Hybrid Zero Dynamics (HZD) was developed and validated, and the decision to match it unlocks direct access to that control theory lineage.</p>
       <p>The project spans mechanical design, electronics integration, simulation, and locomotion control, with the end goal of demonstrating dynamic circular walking on the boom and comparing HZD-based classical control against reinforcement learning under shared metrics.</p>
 
       <div class="media-block fit" style="aspect-ratio: 1040 / 970;">
-        <img src="../assets/img/biped/full_screen_iso_zoom.png" alt="PiB bipedal robot — full isometric CAD view of the torso and legs" loading="lazy">
+        <img src="../assets/img/biped/full_screen_iso_zoom.png" alt="PiB bipedal robot: full isometric CAD view of the torso and legs" loading="lazy">
       </div>
 
       <h2>MECHANICAL DESIGN</h2>
-      <p>The leg geometry uses a five-link parallelogram mechanism — thigh, shank, and a mirrored set of passive links that form the closed kinematic chain. The hip and knee joints on each leg are independently actuated. All structural components are 3D printed, with motor mounts and joint interfaces designed to meet stiffness requirements under walking loads while minimising leg mass.</p>
-      <p>Motor placement at the knee is proximal (motor body near the hip) to reduce the leg's distal inertia and keep the mass distribution favourable for swing dynamics — a decision informed directly by the RABBIT literature.</p>
+      <p>The leg geometry uses a five-link parallelogram mechanism: thigh, shank, and a mirrored set of passive links that form the closed kinematic chain. The hip and knee joints on each leg are independently actuated. All structural components are 3D printed, with motor mounts and joint interfaces designed to meet stiffness requirements under walking loads while minimising leg mass.</p>
+      <p>Motor placement at the knee is proximal (motor body near the hip) to reduce the leg's distal inertia and keep the mass distribution favourable for swing dynamics, a decision informed directly by the RABBIT literature.</p>
 
       <div class="media-block fit" style="aspect-ratio: 2259 / 1145;">
-        <img src="../assets/img/biped/Section_view_cropped.png" alt="PiB bipedal robot — CAD section view showing the five-link parallelogram leg mechanism and internal torso components" loading="lazy">
+        <img src="../assets/img/biped/Section_view_cropped.png" alt="PiB bipedal robot: CAD section view showing the five-link parallelogram leg mechanism and internal torso components" loading="lazy">
       </div>
 
       <h2>ELECTRONICS &amp; ACTUATION</h2>
@@ -75,7 +75,7 @@
       <p>Joint position sensing uses CUI AMT21 encoders operating in event-driven RS-485 mode, providing high-resolution absolute position feedback without polling overhead. Multi-node CAN communication controlling two ODrives simultaneously has been validated, including square trajectory execution on the physical right leg.</p>
 
       <div class="media-block fit" style="aspect-ratio: 16 / 9;">
-        <iframe src="https://www.youtube.com/embed/nHXatzSUmm8" title="PiB right leg — square trajectory test" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="width:100%;height:100%;border:0;"></iframe>
+        <iframe src="https://www.youtube.com/embed/nHXatzSUmm8" title="PiB right leg: square trajectory test" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="width:100%;height:100%;border:0;"></iframe>
       </div>
 
       <div class="stat-row">
@@ -99,15 +99,15 @@
 
       <h2>SOFTWARE STACK</h2>
       <p>The ROS2 workspace is structured across six packages: <code style="font-family:monospace;color:var(--teal)">biped_description</code> (URDF and robot model), <code style="font-family:monospace;color:var(--teal)">biped_gazebo</code> (simulation), <code style="font-family:monospace;color:var(--teal)">biped_control</code> (controllers), <code style="font-family:monospace;color:var(--teal)">biped_hardware</code> (ODrive interface), <code style="font-family:monospace;color:var(--teal)">biped_kinematics</code> (IK and inverse dynamics), and <code style="font-family:monospace;color:var(--teal)">biped_gait</code> (trajectory generation).</p>
-      <p>The URDF models the full five-link geometry including parallelogram mimic constraints, with each T-Motor modelled as a separate inertial link. Gazebo Harmonic provides the physics simulation environment, with <code style="font-family:monospace;color:var(--teal)">ros2_control</code> as the hardware abstraction layer — the same controller code runs in simulation and on hardware by swapping the interface plugin.</p>
+      <p>The URDF models the full five-link geometry including parallelogram mimic constraints, with each T-Motor modelled as a separate inertial link. Gazebo Harmonic provides the physics simulation environment, with <code style="font-family:monospace;color:var(--teal)">ros2_control</code> as the hardware abstraction layer: the same controller code runs in simulation and on hardware by swapping the interface plugin.</p>
       <p>Pinocchio handles all dynamics mathematics: inverse kinematics, inverse dynamics for torque computation, and will serve as the dynamics model inside the trajectory optimiser for HZD.</p>
 
       <div class="media-block fit" style="aspect-ratio: 2559 / 1374;">
-        <img src="../assets/img/biped/rviz.png" alt="PiB bipedal robot — URDF visualisation in RViz, with ROS2 terminal logs and node graph" loading="lazy">
+        <img src="../assets/img/biped/rviz.png" alt="PiB bipedal robot: URDF visualisation in RViz, with ROS2 terminal logs and node graph" loading="lazy">
       </div>
 
       <h2>CONTROL STRATEGY</h2>
-      <p>Walking on a point-foot underactuated biped cannot be achieved with kinematic position control alone — impacts, swing dynamics, and ground reaction forces require torque-based control with a dynamics model. The control architecture targets a 500 Hz loop: read joint state from encoders, compute required torques via Pinocchio inverse dynamics, send over CAN to ODrives.</p>
+      <p>Walking on a point-foot underactuated biped cannot be achieved with kinematic position control alone: impacts, swing dynamics, and ground reaction forces require torque-based control with a dynamics model. The control architecture targets a 500 Hz loop: read joint state from encoders, compute required torques via Pinocchio inverse dynamics, send over CAN to ODrives.</p>
       <p>The classical control baseline uses Hybrid Zero Dynamics with virtual constraints parameterised by Bézier polynomials over a phase variable. Gaits are generated via trajectory optimisation (direct collocation), producing periodic orbits whose stability is verified through a scalar Poincaré return map. The RL pipeline runs in Isaac Lab with a PPO agent; the same Gazebo environment is used to evaluate both controllers fairly under shared metrics.</p>
 
       <h2>METRICS &amp; COMPARISON</h2>
@@ -152,10 +152,10 @@
       <div class="sidebar-block">
         <span class="label">KEY REFERENCES</span>
         <ul>
-          <li>Westervelt et al. — HZD (2007)</li>
-          <li>Hereid &amp; Ames — FROST (2017)</li>
-          <li>Chevallereau et al. — RABBIT (2003)</li>
-          <li>McGeer — Passive dynamics (1990)</li>
+          <li>Westervelt et al., HZD (2007)</li>
+          <li>Hereid &amp; Ames, FROST (2017)</li>
+          <li>Chevallereau et al., RABBIT (2003)</li>
+          <li>McGeer, Passive dynamics (1990)</li>
         </ul>
       </div>
     </aside>
