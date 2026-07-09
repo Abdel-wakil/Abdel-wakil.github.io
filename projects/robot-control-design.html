@@ -65,10 +65,6 @@
       </p>
       <p>The 3×3 inertia matrix M(q), Coriolis/centrifugal matrix V(q,q̇), and gravity vector G(q) were all derived symbolically in MATLAB, using link mass, centre-of-mass distances, and inertia values taken directly from the CAD model geometry.</p>
 
-      <div class="media-block">
-        <div class="media-placeholder"><div class="txt">ADD PHOTO<br>MATLAB linearisation output / M matrix code</div></div>
-      </div>
-
       <h2>JACOBIAN LINEARISATION &amp; LOCAL STABILITY</h2>
       <p>The nonlinear state-space model was linearised around a worst-case operating point (the arm fully extended horizontally) using a first-order Taylor series expansion. This produced the standard LTI form Δẋ = AΔx + BΔu, from which the MIMO transfer function matrix G(s) was derived.</p>
       <p>The resulting 3×3 transfer function matrix revealed important structural information: the base joint is dynamically decoupled from the shoulder and elbow in this configuration (zero off-diagonal entries in the first row and column), while G₂₃ and G₃₂ capture cross-coupling between the two vertical-plane joints. All plants take the form 1/s², confirming the marginally stable character of the uncompensated system.</p>

@@ -89,10 +89,6 @@
       <p>The control system is split into two layers with a clean interface between them. The high-level layer runs ROS and MoveIt inside a virtual machine: the operator defines target end-effector poses in RViz, and MoveIt's inverse kinematics solver computes the corresponding joint angles [q₁, q₂, q₃, q₄, q₅, q₆]. These joint angles are published as ROS messages.</p>
       <p>The low-level layer is a Python script running on the physical hardware that subscribes to those joint angle messages and translates them into stepper motor step and direction commands in real time. This separation keeps the motion planning logic entirely in the ROS ecosystem while the hardware interface remains lightweight and responsive.</p>
 
-      <div class="media-block">
-        <div class="media-placeholder"><div class="txt">ADD PHOTO / VIDEO<br>arm following a trajectory in RViz</div></div>
-      </div>
-
       <h2>MANUFACTURING &amp; DESIGN FOR PRINT</h2>
       <p>Every structural part was designed to be printable on a consumer-grade FDM printer without supports where possible, and with minimal post-processing. Wall thickness, layer orientation, and infill density were specified per-part based on the loading direction: the cycloidal disc geometry in particular required careful orientation to avoid delamination at the tooth roots.</p>
 
