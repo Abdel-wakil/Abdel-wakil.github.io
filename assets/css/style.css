@@ -291,12 +291,11 @@ h2 {
   border-top: 3px solid var(--teal);
 }
 .card.featured .media {
-  flex: 1 1 52%;
-  aspect-ratio: auto;
-  min-height: 520px;
+  flex: 1 1 58%;
+  aspect-ratio: 4 / 3;
 }
 .card.featured .body {
-  flex: 1 1 48%;
+  flex: 1 1 42%;
   padding: 3.5rem;
   justify-content: center;
   gap: 1.4rem;
