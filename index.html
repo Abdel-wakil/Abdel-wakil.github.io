@@ -63,20 +63,21 @@
 
   <div class="grid">
 
-    <a href="projects/biped.html" class="card">
-      <div class="media fit" style="aspect-ratio: 1040 / 970;">
-        <img src="assets/img/biped/last_version_cropped.png" alt="PiB bipedal robot: isometric CAD render of the torso and legs" loading="lazy">
+    <a href="projects/biped.html" class="card featured">
+      <div class="media fit">
+        <img src="assets/img/biped/last_version_cropped.png" alt="PiB bipedal robot: latest CAD iteration, mid-stride pose" loading="lazy">
       </div>
       <div class="body">
-        <div class="fig-label">FIG. 01 &middot; MSC DISSERTATION &middot; 2026</div>
+        <span class="featured-badge">FLAGSHIP PROJECT</span>
+        <div class="fig-label">FIG. 01 &middot; MSC DISSERTATION &middot; IN PROGRESS</div>
         <h3>Bipedal Robot · PiB</h3>
-        <p>A 5-link, 4-actuator RABBIT-class planar biped. Custom mechanical design, ROS2 software stack, ODrive/CAN actuation, and a dual classical/RL control pipeline targeting dynamic walking.</p>
+        <p>A boom-constrained, 2-DOF-per-leg planar biped with a parallelogram leg linkage. Custom mechanical design, ROS2 software stack, ODrive/CAN actuation, and a from-scratch inverse-kinematics and gait control system, currently validated single-leg on a fixed test rig.</p>
         <div class="tags">
           <span class="tag">ROS2</span>
           <span class="tag">ODrive / CAN</span>
-          <span class="tag">Pinocchio</span>
-          <span class="tag">Isaac Lab</span>
-          <span class="tag">HZD</span>
+          <span class="tag">Analytical IK</span>
+          <span class="tag">ros2_control</span>
+          <span class="tag">Gazebo</span>
         </div>
       </div>
     </a>

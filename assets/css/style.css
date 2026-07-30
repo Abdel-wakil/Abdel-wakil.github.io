@@ -12,7 +12,7 @@
   --ff-display: 'DM Mono', 'Courier New', monospace;
   --ff-body:    'Inter', system-ui, sans-serif;
 
-  --wrap: 1200px;
+  --wrap: 1360px;
   --gap:  2.5rem;
 }
 
@@ -263,6 +263,47 @@ h2 {
   color: var(--muted);
   flex: 1;
 }
+/* flagship project: spans the full grid width with a horizontal
+   split layout, set apart from the rest of the grid */
+.card.featured {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  border-top: 3px solid var(--teal);
+}
+.card.featured .media {
+  flex: 1 1 52%;
+  aspect-ratio: auto;
+  min-height: 520px;
+}
+.card.featured .body {
+  flex: 1 1 48%;
+  padding: 3.5rem;
+  justify-content: center;
+  gap: 1.4rem;
+}
+.card.featured .fig-label { color: var(--teal); }
+.card.featured h3 {
+  font-size: 2.1rem;
+  line-height: 1.2;
+}
+.card.featured p { font-size: 1.1rem; }
+.featured-badge {
+  display: inline-block;
+  font-family: var(--ff-display);
+  font-size: .68rem;
+  letter-spacing: .14em;
+  color: var(--bg);
+  background: var(--teal);
+  padding: .3rem .7rem;
+  border-radius: 2px;
+  width: fit-content;
+}
+@media (max-width: 800px) {
+  .card.featured { flex-direction: column; }
+  .card.featured .media { min-height: 320px; }
+  .card.featured .body { padding: 2.25rem; }
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
