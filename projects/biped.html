@@ -19,9 +19,10 @@
   </div>
 </nav>
 
-<header class="project-hero">
+<header class="project-hero flagship">
   <div class="wrap">
     <a href="../index.html" class="back-link">&#8592; All projects</a>
+    <span class="featured-badge">FLAGSHIP PROJECT</span>
     <div class="eyebrow">FIG. 01 · MSC DISSERTATION · IN PROGRESS</div>
     <h1>PiB</h1>
     <p class="lede">A boom-constrained, 2-DOF-per-leg planar bipedal robot with a passive parallelogram leg linkage, built for my MSc dissertation. Custom mechanical design, ROS2 (Jazzy) software stack, ODrive/CAN torque-mode actuation, and a from-scratch inverse-kinematics and gait control system, currently validated single-leg on a fixed test stand.</p>
@@ -58,8 +59,8 @@
       <p>PiB is a planar bipedal robot constrained to move in a vertical plane via a boom, pivoting around a central mast. Its architecture matches the canonical RABBIT platform from academic literature: a point-foot, underactuated biped, the platform on which Hybrid Zero Dynamics (HZD) was originally developed and validated. Matching that mechanical lineage keeps that control theory reachable as a long-term goal, even though the current control approach is more direct (see <a href="#control-strategy" style="color:var(--teal)">Control Strategy</a> below).</p>
       <p>Each leg has 2 actuated degrees of freedom: hip (swing, X-axis, &plusmn;90&deg;) and knee (bend, X-axis, &minus;8.9&deg; to +43.3&deg;), both rotating about the boom's sagittal axis. A passive parallelogram 4-bar linkage keeps the foot parallel to the ground through the full knee range with no extra actuator: as the knee bends, a mimic joint on the parallel rod cancels the rotation automatically.</p>
 
-      <div class="media-block fit" style="aspect-ratio: 1040 / 970;">
-        <img src="../assets/img/biped/last_version_cropped.png" alt="PiB bipedal robot: latest CAD iteration, mid-stride pose" loading="lazy">
+      <div class="media-block fit" style="aspect-ratio: 1352 / 1140;">
+        <img src="../assets/img/biped/torso_update.png" alt="PiB bipedal robot: updated torso shell design, close-up isometric view" loading="lazy">
       </div>
 
       <div class="media-block fit" style="aspect-ratio: 1832 / 1046;">
@@ -69,8 +70,8 @@
       <h2>MECHANICAL DESIGN</h2>
       <p>All structural components are 3D printed. The torso houses the hip motors and central electronics; the most recent revision (below) reworks the outer shell for a cleaner cable path and a stiffer motor mount interface. Motor placement at the knee is proximal (motor body near the hip) to reduce the leg's distal inertia and keep the mass distribution favourable for swing dynamics, a decision informed directly by the RABBIT literature.</p>
 
-      <div class="media-block fit" style="aspect-ratio: 1352 / 1140;">
-        <img src="../assets/img/biped/torso_update.png" alt="PiB bipedal robot: updated torso shell design, close-up isometric view" loading="lazy">
+      <div class="media-block fit" style="aspect-ratio: 1040 / 970;">
+        <img src="../assets/img/biped/last_version_cropped.png" alt="PiB bipedal robot: latest CAD iteration, mid-stride pose" loading="lazy">
       </div>
 
       <p>Physical parameters, measured from the current build:</p>
@@ -141,6 +142,23 @@
         <li>IMU integration for balance feedback, and a footstep planner for speed/direction control</li>
       </ul>
       <p>The longer-term dissertation goal is still the original one: demonstrating dynamic circular walking on the boom and comparing a classical Hybrid-Zero-Dynamics controller against reinforcement learning under shared metrics, once the joint-space groundwork above is solid.</p>
+
+      <h2>GALLERY</h2>
+      <p>Earlier design iterations and reference angles. More photos from the lab, and additional test footage, to be added here as the build progresses.</p>
+      <div class="gallery-grid">
+        <a href="../assets/img/biped/last_version.png" target="_blank" class="gallery-item">
+          <img src="../assets/img/biped/last_version.png" alt="PiB: mid-stride pose, full CAD render" loading="lazy">
+        </a>
+        <a href="../assets/img/biped/full_screen_iso_zoom.png" target="_blank" class="gallery-item">
+          <img src="../assets/img/biped/full_screen_iso_zoom.png" alt="PiB: earlier design iteration, isometric view" loading="lazy">
+        </a>
+        <a href="../assets/img/biped/full_screen_iso_cropped.png" target="_blank" class="gallery-item">
+          <img src="../assets/img/biped/full_screen_iso_cropped.png" alt="PiB: earlier design iteration, wide isometric view" loading="lazy">
+        </a>
+        <a href="../assets/img/biped/iso.png" target="_blank" class="gallery-item">
+          <img src="../assets/img/biped/iso.png" alt="PiB: earliest design iteration, isometric view" loading="lazy">
+        </a>
+      </div>
 
     </div>
 
