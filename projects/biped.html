@@ -5,6 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PiB · Abdelwakil Khamsi</title>
 <link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  /* ── Gallery grid ──────────────────────────────────────── */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+  @media (max-width: 700px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .gallery-grid img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    transition: opacity 0.2s;
+  }
+  .gallery-grid img:hover { opacity: 0.85; cursor: zoom-in; }
+  .gallery-grid .span2 { grid-column: span 2; }
+  .gallery-grid .span2 img { aspect-ratio: 16/9; }
+
+  /* ── Lightbox ──────────────────────────────────────────── */
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+  #lightbox.open { display: flex; }
+  #lightbox img {
+    max-width: 92vw;
+    max-height: 92vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+</style>
 </head>
 <body>
 
@@ -25,7 +67,7 @@
     <span class="featured-badge">FLAGSHIP PROJECT</span>
     <div class="eyebrow">FIG. 01 · MSC DISSERTATION · IN PROGRESS</div>
     <h1>PiB</h1>
-    <p class="lede">A boom-constrained, 2-DOF-per-leg planar bipedal robot with a passive parallelogram leg linkage, built for my MSc dissertation. Custom mechanical design, ROS2 (Jazzy) software stack, ODrive/CAN torque-mode actuation, and a from-scratch inverse-kinematics and gait control system, currently validated single-leg on a fixed test stand.</p>
+    <p class="lede">A boom-constrained, 2-DOF-per-leg planar bipedal robot with a passive parallelogram leg linkage, built for my MSc dissertation. Custom mechanical design, ROS2 (Jazzy) software stack, ODrive/CAN torque-mode actuation, Bezier foot-trajectory gait system, Pinocchio inverse dynamics, and Gazebo Harmonic simulation — single-leg hardware-validated, full simulation running.</p>
   </div>
 </header>
 
@@ -57,7 +99,7 @@
 
       <h2>WHAT IS PiB</h2>
       <p>PiB is a planar bipedal robot constrained to move in a vertical plane via a boom, pivoting around a central mast. Its architecture matches the canonical RABBIT platform from academic literature: a point-foot, underactuated biped, the platform on which Hybrid Zero Dynamics (HZD) was originally developed and validated. Matching that mechanical lineage keeps that control theory reachable as a long-term goal, even though the current control approach is more direct (see <a href="#control-strategy" style="color:var(--teal)">Control Strategy</a> below).</p>
-      <p>Each leg has 2 actuated degrees of freedom: hip (swing, X-axis, &plusmn;90&deg;) and knee (bend, X-axis, &minus;8.9&deg; to +43.3&deg;), both rotating about the boom's sagittal axis. A passive parallelogram 4-bar linkage keeps the foot parallel to the ground through the full knee range with no extra actuator: as the knee bends, a mimic joint on the parallel rod cancels the rotation automatically.</p>
+      <p>Each leg has 2 actuated degrees of freedom: hip (swing, X-axis, &plusmn;90&deg;) and knee (bend, X-axis, &minus;8.9&deg; to +43.3&deg;), both rotating about the boom's sagittal axis. A passive parallelogram 4-bar linkage keeps the foot parallel to the ground through the full knee range with no extra actuator: as the knee bends, a loop-closure constraint on the parallel rod cancels the rotation automatically.</p>
 
       <div class="media-block fit" style="aspect-ratio: 1352 / 1140;">
         <img src="../assets/img/biped/torso_update.png" alt="PiB bipedal robot: updated torso shell design, close-up isometric view" loading="lazy">
@@ -68,7 +110,7 @@
       </div>
 
       <h2>MECHANICAL DESIGN</h2>
-      <p>All structural components are 3D printed. The torso houses the hip motors and central electronics; the most recent revision (below) reworks the outer shell for a cleaner cable path and a stiffer motor mount interface. Motor placement at the knee is proximal (motor body near the hip) to reduce the leg's distal inertia and keep the mass distribution favourable for swing dynamics, a decision informed directly by the RABBIT literature.</p>
+      <p>All structural components are 3D printed. The torso houses the hip motors and central electronics; the most recent revision reworks the outer shell for a cleaner cable path and a stiffer motor mount interface. Motor placement at the knee is proximal (motor body near the hip) to reduce the leg's distal inertia and keep the mass distribution favourable for swing dynamics — a decision informed directly by the RABBIT literature.</p>
 
       <div class="media-block fit" style="aspect-ratio: 1366 / 1140;">
         <img src="../assets/img/biped/electronics_view.png" alt="PiB bipedal robot: torso with front panel removed, showing internal electronics" loading="lazy">
@@ -78,6 +120,7 @@
       <ul>
         <li>Total leg mass (both legs): ~2.7 kg</li>
         <li>Thigh length (hip &rarr; knee): 149.5 mm</li>
+        <li>Shank length (knee &rarr; foot): 150 mm</li>
         <li>Hip gear ratio: 5.000 : 1 &nbsp;&middot;&nbsp; Knee gear ratio: 8.333 : 1</li>
         <li>Frames: all motion in the sagittal (YZ) plane; left/right legs share one sign convention, since both hips rotate about the same world X-axis</li>
       </ul>
@@ -87,10 +130,10 @@
       </div>
 
       <h2>ELECTRONICS &amp; ACTUATION</h2>
-      <p>Each of the four joints is driven by its own single-axis ODrive S1 controller, addressed by CAN <code style="font-family:monospace;color:var(--teal)">node_id</code> (0&ndash;3) over one shared bus at 1 Mbps: there's no <code style="font-family:monospace;color:var(--teal)">axis1</code> to reference the way a dual-axis board would have. Motors are T-Motor MN7005-32 KV115 units (24N28P &rarr; 14 pole pairs). Joint position uses CUI AMT21 absolute encoders, which remember true physical position across power cycles once a one-time software zero calibration has been run.</p>
+      <p>Each of the four joints is driven by its own single-axis ODrive S1 controller, addressed by CAN <code style="font-family:monospace;color:var(--teal)">node_id</code> (0&ndash;3) over one shared bus at 1 Mbps. Motors are T-Motor MN7005-32 KV115 units (24N28P &rarr; 14 pole pairs). Joint position uses CUI AMT21 absolute encoders, which remember true physical position across power cycles once a one-time software zero calibration has been run.</p>
 
       <div class="media-block fit" style="aspect-ratio: 16 / 9;">
-        <iframe src="https://www.youtube.com/embed/nHXatzSUmm8" title="PiB right leg: square trajectory test" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="width:100%;height:100%;border:0;"></iframe>
+        <iframe src="https://www.youtube.com/embed/aQFGWMCPwBw" title="PiB bipedal robot: Bezier gait trajectory test" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="width:100%;height:100%;border:0;"></iframe>
       </div>
 
       <div class="stat-row">
@@ -113,38 +156,64 @@
       </div>
 
       <h2>THE ODRIVE GEAR-RATIO BUG</h2>
-      <p>The vendored <code style="font-family:monospace;color:var(--teal)">odrive_ros2_control</code> driver declares a <code style="font-family:monospace;color:var(--teal)">gear_ratio</code> parameter in the URDF's <code style="font-family:monospace;color:var(--teal)">&lt;ros2_control&gt;</code> block, but silently never applies it: it treats the position command/state interface as raw motor-shaft radians, 1:1. Sent straight through, any joint-space angle moves the real joint by only <code style="font-family:monospace;color:var(--teal)">1/gear_ratio</code> of what was intended, and any position read back is the raw motor-shaft angle, not the joint angle.</p>
-      <p>Rather than patch the vendored C++ driver, the fix lives in one place in Python: <code style="font-family:monospace;color:var(--teal)">gear_ratios.py</code> converts joint angle &harr; motor-shaft radians for every node that talks to real hardware, gated by a <code style="font-family:monospace;color:var(--teal)">use_motors</code> flag (simulation has no such quirk, so converting there would be wrong). A read-side counterpart, <code style="font-family:monospace;color:var(--teal)">joint_state_corrector.py</code>, republishes a gear-ratio-corrected <code style="font-family:monospace;color:var(--teal)">/joint_states_corrected</code> topic so RViz shows real joint angles instead of raw motor-shaft values.</p>
+      <p>The vendored <code style="font-family:monospace;color:var(--teal)">odrive_ros2_control</code> driver declares a <code style="font-family:monospace;color:var(--teal)">gear_ratio</code> parameter in the URDF's <code style="font-family:monospace;color:var(--teal)">&lt;ros2_control&gt;</code> block, but silently never applies it: it treats the position command/state interface as raw motor-shaft radians, 1:1. Sent straight through, any joint-space angle moves the real joint by only <code style="font-family:monospace;color:var(--teal)">1/gear_ratio</code> of what was intended.</p>
+      <p>Rather than patch the vendored C++ driver, the fix lives in one place in Python: <code style="font-family:monospace;color:var(--teal)">gear_ratios.py</code> converts joint angle &harr; motor-shaft radians for every node that talks to real hardware, gated by a <code style="font-family:monospace;color:var(--teal)">use_motors</code> flag. A read-side counterpart, <code style="font-family:monospace;color:var(--teal)">joint_state_corrector.py</code>, republishes a gear-ratio-corrected <code style="font-family:monospace;color:var(--teal)">/joint_states_corrected</code> topic so RViz shows real joint angles instead of raw motor-shaft values. The knee gear ratio was determined empirically through hardware testing: 7.353 &rarr; 8.667 &rarr; <strong style="color:var(--teal)">8.333</strong>, with the negative sign (direction reversal) also discovered by testing against the physical leg.</p>
 
       <h2>SOFTWARE STACK</h2>
-      <p>The ROS2 workspace is structured across four packages: <code style="font-family:monospace;color:var(--teal)">biped_description</code> (URDF, meshes, Gazebo world, RViz config, <code style="font-family:monospace;color:var(--teal)">ros2_control</code> definitions), <code style="font-family:monospace;color:var(--teal)">biped_control</code> (inverse kinematics, calibration, gear-ratio handling), <code style="font-family:monospace;color:var(--teal)">biped_gait_generation</code> (the joint-space walking gait state machine), and <code style="font-family:monospace;color:var(--teal)">ros_odrive</code> (the third-party ODrive driver, vendored from odriverobotics/ros_odrive rather than pulled in as a submodule).</p>
-      <p>Gazebo Harmonic provides the physics simulation environment, with <code style="font-family:monospace;color:var(--teal)">ros2_control</code> as the hardware abstraction layer: the same controller code runs in simulation and on hardware by swapping the interface plugin. One caveat: Gazebo's default DART physics engine doesn't support mimic constraints, so the parallelogram's mimic joints dangle freely in Gazebo even though RViz (via <code style="font-family:monospace;color:var(--teal)">robot_state_publisher</code>) handles them correctly.</p>
+      <p>The ROS2 workspace spans six packages: <code style="font-family:monospace;color:var(--teal)">biped_description</code> (URDF, SDF, worlds, launch files, <code style="font-family:monospace;color:var(--teal)">ros2_control</code> config), <code style="font-family:monospace;color:var(--teal)">biped_control</code> (IK, calibration, gear-ratio handling), <code style="font-family:monospace;color:var(--teal)">foot_trajectory_planner</code> (Bezier library and interactive 17-CP designer), <code style="font-family:monospace;color:var(--teal)">biped_gait_generation</code> (bipedal gait coordinator), and <code style="font-family:monospace;color:var(--teal)">ros_odrive</code> (vendored ODrive driver).</p>
+      <p>Simulation runs on <strong>Gazebo Harmonic</strong> with the <strong>Bullet physics engine</strong> — a deliberate choice over the default DART engine, which rejects closed kinematic loops entirely. Bullet handles the parallelogram as a constraint between two already-parented rigid bodies, making true four-bar loop closure possible in simulation. The SDF model (<code style="font-family:monospace;color:var(--teal)">biped.sdf</code>) is hand-authored rather than auto-generated, to use correct Harmonic material conventions and guarantee the plugin placement order. The model has 19 joints (9 fixed structural + 10 revolute), including <code style="font-family:monospace;color:var(--teal)">par_lower_joint</code> — a direct revolute from the par-link to the foot that closes the four-bar loop physically rather than through a software mimic.</p>
 
       <div class="media-block fit" style="aspect-ratio: 2559 / 1374;">
         <img src="../assets/img/biped/rviz.png" alt="PiB bipedal robot: URDF visualisation in RViz, with ROS2 terminal logs and node graph" loading="lazy">
       </div>
 
+      <h2>DYNAMICS — PINOCCHIO RNEA</h2>
+      <p>Trajectory validation uses <strong>Pinocchio 4.0</strong> for model-based inverse dynamics. A gravity profiler (<code style="font-family:monospace;color:var(--teal)">gravity_profile.py</code>) loads the designer's control points, reconstructs the full stance+swing Bezier trajectory via the same IK functions used in hardware, enforces the parallelogram mimic constraints in joint space, and computes G(q) at every sample along the gait cycle.</p>
+      <p>A full RNEA pass (<code style="font-family:monospace;color:var(--teal)">replay_trajectory.py</code>) extends this to complete inverse dynamics torques — inertial, Coriolis, and gravity — overlaid with the gravity-only baseline. The planned validation step is running both Pinocchio and Gazebo simultaneously on the same trajectory and comparing their joint torque outputs: divergence pinpoints model errors before they reach hardware.</p>
+
       <h2 id="control-strategy">CONTROL STRATEGY</h2>
-      <p>The leg is a 3R planar arm with a parallelogram constraint (&theta;<sub>ankle</sub> = &minus;&theta;<sub>knee</sub>), which collapses to an equivalent closed-form 2R problem, solved analytically rather than through a general-purpose IK solver:</p>
+      <p>The leg is a 3R planar arm with a parallelogram constraint (&theta;<sub>ankle</sub> = &minus;&theta;<sub>knee</sub>), which collapses to an equivalent closed-form 2R problem, solved analytically:</p>
       <p style="font-family: 'DM Mono', monospace; font-size: .85rem; color: var(--teal); padding: .75rem 1rem; border-left: 2px solid var(--teal-dim); margin: 1rem 0;">
         cos(&phi;<sub>2</sub>) = (p<sub>y</sub>&sup2; + p<sub>z</sub>&sup2; &minus; L<sub>1</sub>&sup2; &minus; L<sub>2</sub>&sup2;) / (2&middot;L<sub>1</sub>&middot;L<sub>2</sub>)<br>
         &theta;<sub>hip</sub> = atan2(p<sub>y</sub>, &minus;p<sub>z</sub>) &minus; atan2(L<sub>2</sub>sin&phi;<sub>2</sub>, L<sub>1</sub>+L<sub>2</sub>cos&phi;<sub>2</sub>)
       </p>
-      <p><code style="font-family:monospace;color:var(--teal)">solve_ik()</code> raises an exception for any target outside the joint limits or physical reach: this is the project's core safety net, relied on by every node that builds a trajectory.</p>
-      <p>Walking is currently a joint-space gait state machine (<code style="font-family:monospace;color:var(--teal)">single_leg_gait.py</code>) running on one leg on a fixed test stand: linear interpolation between four hand-specified waypoints (touchdown &rarr; push &rarr; lift-off &rarr; swing &rarr; touchdown), validating the joint motion pattern and timing rather than full body dynamics or ground-reaction forces. Before every calibration or gait run, the AMT21's absolute position is compared against the expected pose and a persistent per-joint zero offset (stored outside the repo, since it's hardware calibration state, not source) keeps that physical pose reading as zero across power cycles.</p>
+      <p><code style="font-family:monospace;color:var(--teal)">solve_ik()</code> raises an exception for any target outside joint limits or physical reach — the core safety net relied on by every node that builds a trajectory.</p>
+      <p>Foot trajectories are parameterised as <strong>Bezier curves</strong> in foot-space, designed with an interactive 17-control-point tool that renders real-time RViz markers and enforces bipedal step-height constraints. The designer saves control points to disk; the gait nodes reload them at runtime, sample the curve at 250 Hz, run IK at each sample, and stream joint angles to the trajectory controllers via ROS2 action goals. The <strong>physical right leg has successfully tracked the Bezier swing trajectory</strong> — the first hardware-validated gait motion on the project.</p>
 
       <h2>CURRENT STATUS &amp; NEXT STEPS</h2>
-      <p>What's built and verified: closed-form leg IK, per-joint hardware calibration with direction/offset verification, the gear-ratio conversion layer, and a single-leg joint-space gait cycle on the fixed stand. What's next, in the order it's being tackled:</p>
+      <p>What's built and validated:</p>
       <ul>
-        <li>Apply the gear-ratio conversion to the square-trajectory and sinusoidal-gait nodes, the same fix already applied to calibration, not yet ported over</li>
-        <li>Real IK for the gait's PUSH phase, replacing a fixed placeholder knee angle with one that actually keeps the foot planted as the hip sweeps</li>
-        <li>Two-leg coordinated (anti-phase) walking: single-leg only so far</li>
-        <li>IMU integration for balance feedback, and a footstep planner for speed/direction control</li>
+        <li>Closed-form leg IK with joint-limit safety checks</li>
+        <li>Per-joint hardware calibration — direction, gear ratio, and zero-offset, persistent across power cycles</li>
+        <li>Bezier foot-trajectory gait system with interactive 17-CP designer and RViz preview</li>
+        <li><strong style="color:var(--teal)">Hardware milestone:</strong> physical right leg tracks Bezier swing curve successfully</li>
+        <li>Pinocchio 4.0 inverse dynamics pipeline — gravity and full RNEA torques along gait cycle</li>
+        <li>Gazebo Harmonic simulation with Bullet physics — robot spawns, 4 controllers active, joints held by 200 Nm/rad position gain</li>
+        <li>Bullet four-bar loop closure constraint via direct <code style="font-family:monospace;color:var(--teal)">par_lower_joint</code> (under verification)</li>
       </ul>
-      <p>The longer-term dissertation goal is still the original one: demonstrating dynamic circular walking on the boom and comparing a classical Hybrid-Zero-Dynamics controller against reinforcement learning under shared metrics, once the joint-space groundwork above is solid.</p>
+      <p>What's next, in order:</p>
+      <ul>
+        <li>Verify parallelogram loop closure in simulation — confirm foot stays vertical during knee bend under Bullet constraint forces</li>
+        <li>Pinocchio vs. Gazebo joint-torque comparison — the primary model validation step before new trajectories go to hardware</li>
+        <li>Left-leg hardware validation — right leg is done; run the same Bezier gait on the left leg to confirm bilateral symmetry</li>
+        <li>Bipedal gait coordination — interleave left and right leg trajectories with correct phase offset</li>
+        <li>Free-floating base simulation — remove the fixed world pin and add a balance controller for full locomotion simulation</li>
+        <li>The dissertation goal: demonstrating circular walking on the boom, then comparing Hybrid Zero Dynamics against reinforcement learning under shared metrics</li>
+      </ul>
 
       <h2>GALLERY</h2>
-      <p>More photos from the lab, and additional test footage, to be added here as the build progresses.</p>
+
+      <div class="gallery-grid">
+        <div class="span2">
+          <img src="../assets/img/biped/reallast_version-big-pic.png" alt="PiB full assembly, latest revision" loading="lazy" onclick="openLightbox(this.src)">
+        </div>
+        <img src="../assets/img/biped/iso.png" alt="PiB isometric view" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="../assets/img/biped/full_screen_iso_zoom.png" alt="PiB close-up isometric" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="../assets/img/biped/without_front_panel.png" alt="PiB with front panel removed" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="../assets/img/biped/real-last_version.png" alt="PiB latest version side view" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="../assets/img/biped/full_screen_iso.png" alt="PiB full-screen isometric view" loading="lazy" onclick="openLightbox(this.src)">
+        <img src="../assets/img/biped/last_version.png" alt="PiB last version" loading="lazy" onclick="openLightbox(this.src)">
+      </div>
 
     </div>
 
@@ -164,7 +233,9 @@
         <div class="tags">
           <span class="tag">ROS2 Jazzy</span>
           <span class="tag">Gazebo Harmonic</span>
+          <span class="tag">Bullet Physics</span>
           <span class="tag">ros2_control</span>
+          <span class="tag">Pinocchio 4.0</span>
           <span class="tag">Python</span>
           <span class="tag">C++</span>
         </div>
@@ -173,14 +244,26 @@
         <span class="label">CONTROL METHODS</span>
         <ul>
           <li>Analytical 2R inverse kinematics</li>
-          <li>Joint-space gait state machine</li>
-          <li>ODrive CAN torque-mode control</li>
+          <li>Bezier foot-trajectory gait system</li>
+          <li>17-CP interactive trajectory designer</li>
+          <li>RNEA inverse dynamics (Pinocchio)</li>
+          <li>ODrive CAN position-mode control</li>
           <li>Gear-ratio &amp; zero-offset calibration</li>
         </ul>
       </div>
       <div class="sidebar-block">
+        <span class="label">SIMULATION</span>
+        <ul>
+          <li>Gazebo Harmonic + Bullet physics</li>
+          <li>19 joints — 9 fixed, 10 revolute</li>
+          <li>Four-bar loop closure via <code style="font-family:monospace;font-size:.85em;color:var(--teal)">par_lower_joint</code></li>
+          <li>gz_ros2_control hardware bridge</li>
+          <li>250 Hz physics step</li>
+        </ul>
+      </div>
+      <div class="sidebar-block">
         <span class="label">LONG-TERM GOAL</span>
-        <p>Hybrid Zero Dynamics vs. reinforcement learning, compared on shared metrics once single-leg joint-space control is solid, the reason the mechanical design matches RABBIT in the first place.</p>
+        <p>Hybrid Zero Dynamics vs. reinforcement learning, compared on shared metrics once bilateral walking on the boom is established.</p>
       </div>
       <div class="sidebar-block">
         <span class="label">KEY REFERENCES</span>
@@ -208,6 +291,21 @@
     </ul>
   </div>
 </footer>
+
+<div id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
 
 </body>
 </html>
