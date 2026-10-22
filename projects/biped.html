@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PiB · Abdelwakil Khamsi</title>
 <meta name="description" content="PiB: a five-link, four-actuator planar bipedal robot on a boom-constrained walking rig. Custom mechanics, ODrive/CAN actuation, a ROS 2 stack built from scratch, and walking gaits from trajectory optimisation.">
-<link rel="stylesheet" href="../assets/css/style.css">
-<script src="../assets/js/site.js" defer></script>
+<link rel="stylesheet" href="../assets/css/style.css?v=4">
+<script src="../assets/js/site.js?v=4" defer></script>
 </head>
 <body>
 
@@ -62,33 +62,26 @@
 
     <div class="prose">
 
-      <figure class="figure">
-        <div class="media-block fit" style="aspect-ratio: 16 / 9;">
-          <img src="../assets/img/biped/gallery/web/20260728_174844.jpg" alt="PiB mounted on the boom walking rig in the lab, with the control PC beside it" loading="eager">
-        </div>
-        <figcaption><b>FIG. 1.1</b>PiB on the boom-constrained walking rig in the lab.</figcaption>
-      </figure>
-
       <h2>WHAT IS PiB</h2>
       <p>PiB is a planar bipedal robot constrained to move in a vertical plane by a boom that pivots around a central mast. It extends a single-leg design from Prof. Alexander Badri-Spr&ouml;witz's group (Mo et al., <em>Scientific Reports</em>, 2023) into a complete five-link, four-actuator robot, with eleven documented design changes along the way.</p>
       <p>Its architecture matches the canonical RABBIT platform from the academic literature: a point-foot, underactuated biped, the platform on which Hybrid Zero Dynamics (HZD) was first developed and validated. Matching that mechanical lineage keeps that body of control theory within reach, even though the current approach is model-based trajectory optimisation (see <a href="#control-strategy" style="color:var(--teal)">Control Strategy</a> below).</p>
       <p>Each leg has 2 actuated degrees of freedom: hip (swing, X-axis, &plusmn;90&deg;) and knee (bend, X-axis, &minus;8.9&deg; to +43.3&deg;), both rotating about the boom's sagittal axis. A passive parallelogram 4-bar linkage keeps the foot parallel to the ground through the full knee range with no extra actuator: as the knee bends, a loop-closure constraint on the parallel rod cancels the rotation automatically.</p>
 
       <figure class="figure">
-        <div class="media-block fit" style="aspect-ratio: 1832 / 1046;">
-          <img src="../assets/img/biped/boom_system.png" alt="PiB CAD model mounted on the boom, with the central pivot mast it swings around" loading="lazy">
+        <div class="media-block fit" style="aspect-ratio: 1974 / 952;">
+          <img src="../assets/img/biped/full_rig_v2.png" alt="CAD of the full rig: PiB fully assembled on the boom, with the central pivot mast it swings around" loading="lazy">
         </div>
-        <figcaption><b>FIG. 1.2</b>CAD of the full rig: the boom constrains PiB to the sagittal plane while it walks in a circle around the mast.</figcaption>
+        <figcaption><b>FIG. 1.1</b>CAD of the full rig: the boom constrains PiB to the sagittal plane while it walks in a circle around the mast.</figcaption>
       </figure>
 
       <h2>MECHANICAL DESIGN</h2>
       <p>The structure is 3D printed; the drive parts are steel, bought in and modified in-house after metal printing and EDM both proved impractical for them. The torso houses the hip motors and central electronics, and the most recent revision reworks the outer shell for a cleaner cable path and a stiffer motor mount interface. Motor placement at the knee is proximal (motor body near the hip) to reduce the leg's distal inertia and keep the mass distribution favourable for swing dynamics, a decision informed directly by the RABBIT literature.</p>
 
       <figure class="figure">
-        <div class="media-block fit" style="aspect-ratio: 1352 / 1140;">
-          <img src="../assets/img/biped/torso_update.png" alt="PiB CAD: updated torso shell design, close-up isometric view" loading="lazy">
+        <div class="media-block fit" style="aspect-ratio: 1043 / 1077;">
+          <img src="../assets/img/biped/planar_bipedal_robot.png" alt="PiB planar bipedal robot, fully assembled CAD, isometric view" loading="lazy">
         </div>
-        <figcaption><b>FIG. 2.1</b>Latest torso shell revision.</figcaption>
+        <figcaption><b>FIG. 2.1</b>Planar bipedal robot, fully assembled.</figcaption>
       </figure>
 
       <figure class="figure">
@@ -108,10 +101,10 @@
       </ul>
 
       <figure class="figure">
-        <div class="media-block fit" style="aspect-ratio: 2259 / 1145;">
-          <img src="../assets/img/biped/Section_view_cropped.png" alt="PiB CAD section view showing the parallelogram leg mechanism and internal torso components" loading="lazy">
+        <div class="media-block fit" style="aspect-ratio: 1405 / 1112;">
+          <img src="../assets/img/biped/section_view_v2.png" alt="PiB CAD section view through the latest torso shell, showing the hip drive stages, bearings and electronics bay" loading="lazy">
         </div>
-        <figcaption><b>FIG. 2.3</b>Section view: the parallelogram leg linkage and the internal torso layout.</figcaption>
+        <figcaption><b>FIG. 2.3</b>Section view through the latest shell: hip drive stages, bearings and the electronics bay.</figcaption>
       </figure>
 
       <!--
@@ -158,7 +151,7 @@
         <div class="media-block fit" style="aspect-ratio: 16 / 9;">
           <iframe src="https://www.youtube.com/embed/aQFGWMCPwBw" title="PiB bipedal robot: Bezier gait trajectory test" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
-        <figcaption><b>VID. 1</b>B&eacute;zier gait trajectory test on hardware.</figcaption>
+        <figcaption><b>VID. 1</b>Walking gait: B&eacute;zier trajectory test on hardware.</figcaption>
       </figure>
 
       <div class="stat-row">
@@ -195,6 +188,13 @@
         <figcaption><b>FIG. 3.1</b>URDF in RViz, alongside the ROS 2 node graph and logs.</figcaption>
       </figure>
 
+      <figure class="figure">
+        <div class="media-block fit" style="aspect-ratio: 16 / 9;">
+          <iframe src="https://www.youtube.com/embed/oR-d7k2da8E" title="PiB bipedal robot: kinematic simulation" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <figcaption><b>VID. 2</b>Kinematic simulation.</figcaption>
+      </figure>
+
       <h2>DYNAMICS: PINOCCHIO RNEA</h2>
       <p>Model-based work uses <strong>Pinocchio 4.0</strong> for inverse dynamics. A gravity profiler (<code>gravity_profile.py</code>) loads the designer's control points, reconstructs the full stance + swing B&eacute;zier trajectory through the same IK functions used on hardware, enforces the parallelogram constraints in joint space, and computes G(q) at every sample along the gait cycle.</p>
       <p>A full RNEA pass (<code>replay_trajectory.py</code>) extends this to complete inverse-dynamics torques (inertial, Coriolis and gravity), overlaid on the gravity-only baseline. Pinocchio is also the reference the trajectory optimiser's dynamic model is verified against.</p>
@@ -226,6 +226,13 @@
         <li>Gazebo Harmonic simulation with Bullet physics, sharing one <code>ros2_control</code> interface with the hardware</li>
         <li><strong style="color:var(--teal)">Trajectory-optimised gaits (CasADi + IPOPT)</strong>, verified against Pinocchio, validated in simulation and trialled on the robot</li>
       </ul>
+      <figure class="figure">
+        <div class="media-block fit" style="aspect-ratio: 16 / 9;">
+          <iframe src="https://www.youtube.com/embed/beHfALL0_go" title="PiB bipedal robot: walking trials" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <figcaption><b>VID. 3</b>Walking trials on the boom rig.</figcaption>
+      </figure>
+
       <p>Walking trials have isolated five specific mechanical faults, each with a planned fix, and foot slip is now the limiting factor. What's next:</p>
       <ul>
         <li>Fix the five mechanical faults found in walking trials</li>
@@ -236,16 +243,13 @@
 
       <h2>GALLERY</h2>
 
-      <figure class="figure">
-        <div class="media-block fit" style="aspect-ratio: 16 / 9;">
-          <iframe src="https://www.youtube.com/embed/oR-d7k2da8E" title="PiB bipedal robot demo" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
-        <figcaption><b>VID. 2</b>PiB demo.</figcaption>
-      </figure>
-
       <div class="gallery">
-        <a class="gallery-item feature" href="../assets/img/biped/gallery/web/1.jpg">
-          <img src="../assets/img/biped/gallery/web/1.jpg" alt="PiB with the torso shell open, showing the drive electronics" width="405" height="720" loading="lazy">
+        <a class="gallery-item" href="../assets/img/biped/gallery/web/20260728_174844.jpg">
+          <img src="../assets/img/biped/gallery/thumb/20260728_174844.jpg" alt="PiB mounted on the boom walking rig in the lab, with the control PC beside it" width="720" height="405" loading="lazy">
+          <figcaption>Development phase: PiB on the boom rig with the control PC.</figcaption>
+        </a>
+        <a class="gallery-item" href="../assets/img/biped/gallery/web/1.jpg">
+          <img src="../assets/img/biped/gallery/thumb/1.jpg" alt="PiB with the torso shell open, showing the drive electronics" width="405" height="720" loading="lazy">
           <figcaption>Torso shell open: drive electronics on the deck.</figcaption>
         </a>
         <a class="gallery-item" href="../assets/img/biped/gallery/web/20260723_180110.jpg">
@@ -256,7 +260,7 @@
           <img src="../assets/img/biped/gallery/thumb/20260723_180040.jpg" alt="PiB on the boom rig, side view with the shell closed" width="405" height="720" loading="lazy">
           <figcaption>On the boom rig, shell closed.</figcaption>
         </a>
-        <a class="gallery-item wide" href="../assets/img/biped/gallery/web/20260728_174848.jpg">
+        <a class="gallery-item" href="../assets/img/biped/gallery/web/20260728_174848.jpg">
           <img src="../assets/img/biped/gallery/thumb/20260728_174848.jpg" alt="PiB powered up, with status LEDs lit on the electronics" width="720" height="405" loading="lazy">
           <figcaption>Powered up for a test run.</figcaption>
         </a>

@@ -507,13 +507,10 @@ h2 {
   .anim-grid { grid-template-columns: 1fr; }
 }
 
-/* photo gallery: even grid of 3:4 tiles; .feature spans 2x2 and
-   .wide spans 2 columns, so 1 feature + 1 wide + 6 tiles fill 12 cells
-   on both the 3-column and the 2-column layout */
+/* photo gallery: uniform grid of equal tiles, click to enlarge */
 .gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-flow: dense;
   gap: .75rem;
   margin: 1.5rem 0 2rem;
 }
@@ -523,14 +520,13 @@ h2 {
 .gallery-item {
   display: block;
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   border: 1px solid var(--border);
+  border-radius: 4px;
   background: var(--surface);
   cursor: zoom-in;
 }
-.gallery-item.feature { grid-column: span 2; grid-row: span 2; }
-.gallery-item.wide    { grid-column: span 2; aspect-ratio: 3 / 2; }
 .gallery-item img {
   position: absolute;
   inset: 0;
