@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abdelwakil Khamsi · Mechanical &amp; Robotics Engineer</title>
-<meta name="description" content="Mechanical engineering student building a torque-controlled bipedal robot. Portfolio of robotics, mechanical design, and control systems projects.">
+<meta name="description" content="Mechanical and robotics engineer (MSc, Distinction). Portfolio of robotics, mechanical design and control projects, led by PiB, a planar bipedal robot walking on trajectory-optimised gaits.">
 <link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/site.js" defer></script>
 </head>
 <body>
 
@@ -14,7 +15,8 @@
     <a href="index.html" class="nav-mark">AK<span>/</span>PORTFOLIO</a>
     <ul class="nav-links">
       <li><a href="#projects">PROJECTS</a></li>
-      <li><a href="resume.pdf?v=2">RESUME</a></li>
+      <li><a href="#experience">EXPERIENCE</a></li>
+      <li><a href="resume.pdf?v=3">RESUME</a></li>
       <li><a href="#contact">CONTACT</a></li>
     </ul>
   </div>
@@ -22,12 +24,12 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">Mechanical + Robotics Engineer</div>
+    <div class="eyebrow">Mechanical + Robotics Engineer &middot; MSc, Distinction</div>
     <h1>Abdelwakil Khamsi</h1>
-    <p class="lede">Building a torque-controlled, dynamically-walking bipedal robot for my MSc dissertation at Bournemouth University, where mechanical design meets embedded electronics and control theory.</p>
+    <p class="lede">I design, build and control robotic hardware. Right now that means PiB, a planar bipedal robot I took from CAD to walking trials at Bournemouth University, with its own ROS 2 stack and gaits from trajectory optimisation on its full dynamic model.</p>
     <div class="btn-row">
       <a href="#projects" class="btn btn-primary">View projects &#8594;</a>
-      <a href="resume.pdf?v=2" class="btn btn-outline">Download resume</a>
+      <a href="resume.pdf?v=3" class="btn btn-outline">Download resume</a>
       <a href="https://github.com/Abdel-wakil" class="btn btn-outline">GitHub</a>
     </div>
   </div>
@@ -41,11 +43,11 @@
     </div>
     <div class="cell">
       <div class="label">STATUS</div>
-      <div class="value teal"><span class="dot"></span>&nbsp; in progress</div>
+      <div class="value teal"><span class="dot"></span>&nbsp; active research</div>
     </div>
     <div class="cell">
       <div class="label">STARTED</div>
-      <div class="value">Feb 2026</div>
+      <div class="value">Mar 2026</div>
     </div>
     <div class="cell">
       <div class="label">INSTITUTION</div>
@@ -63,19 +65,19 @@
 
   <div class="featured-wrap">
     <a href="projects/biped.html" class="card featured">
-      <div class="media fit" style="aspect-ratio: 1352 / 1140;">
-        <img src="assets/img/biped/torso_update.png" alt="PiB bipedal robot: updated torso shell design" loading="lazy">
+      <div class="media fit">
+        <img src="assets/img/biped/gallery/web/20260728_174848.jpg" alt="PiB bipedal robot powered up on the lab bench, torso shell open" loading="eager">
       </div>
       <div class="body">
         <span class="featured-badge">FLAGSHIP PROJECT</span>
-        <div class="fig-label">FIG. 01 &middot; MSC DISSERTATION &middot; IN PROGRESS</div>
+        <div class="fig-label">FIG. 01 &middot; MSC DISSERTATION &middot; ONGOING RESEARCH</div>
         <h3>Bipedal Robot · PiB</h3>
-        <p>A boom-constrained, 2-DOF-per-leg planar biped with a parallelogram leg linkage. Custom mechanical design, ROS2 software stack, ODrive/CAN actuation, and a from-scratch inverse-kinematics and gait control system, currently validated single-leg on a fixed test rig.</p>
+        <p>A five-link, four-actuator planar biped on a boom-constrained walking rig. Custom 3D-printed mechanics, ODrive S1 actuation over CAN, a ROS 2 stack built from scratch, and walking gaits from CasADi trajectory optimisation that output feedforward torques for the joint loops. Hardware paper in preparation.</p>
         <div class="tags">
-          <span class="tag">ROS2</span>
+          <span class="tag">ROS 2</span>
           <span class="tag">ODrive / CAN</span>
-          <span class="tag">Analytical IK</span>
-          <span class="tag">ros2_control</span>
+          <span class="tag">Pinocchio</span>
+          <span class="tag">CasADi / IPOPT</span>
           <span class="tag">Gazebo</span>
         </div>
       </div>
@@ -223,6 +225,82 @@
 
   </div>
 
+  <!-- EXPERIENCE & EDUCATION -->
+  <div class="section-head" id="experience">
+    <span class="fig">FIG. 08</span>
+    <h2>Experience &amp; education</h2>
+  </div>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="when">MAR 2026 &#8211; PRESENT<span class="kind">RESEARCH</span></div>
+      <div>
+        <h4>Researcher, Planar Bipedal Robot</h4>
+        <div class="org">Bournemouth University</div>
+        <p>Grant-funded MSc project continued after graduation, supervised by Dr Behnam Dadashzadeh. Design, actuation, sensing and trajectory-optimised control of PiB.</p>
+        <a href="projects/biped.html" class="more">READ THE PROJECT &#8594;</a>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="when">SEP 2025 &#8211; SEP 2026<span class="kind">EDUCATION</span></div>
+      <div>
+        <h4>MSc Mechanical Engineering &middot; Distinction</h4>
+        <div class="org">Bournemouth University, England</div>
+        <p>Dissertation: &ldquo;Design, Manufacture and Model-Based Control of a Planar Bipedal Robot&rdquo;, grant-funded by Bournemouth University. Modules in advanced structural mechanics, failure analysis, robotic control design and model-based engineering.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="when">NOV 2023 &#8211; AUG 2024<span class="kind">INDUSTRY</span></div>
+      <div>
+        <h4>Design Release Engineer</h4>
+        <div class="org">Segula Technologies &middot; client: Stellantis</div>
+        <p>Design release of a hydrogen fuel cell system for a heavy-duty truck, with engineering teams in the US, Germany, France and Romania. Supported removal of the turbine bypass (&euro;32.50 saved per part), resolved supplier issues, validated the &ldquo;eBurn&rdquo; energy-dissipation function and analysed test failures.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="when">FEB 2023 &#8211; MAY 2023<span class="kind">INDUSTRY</span></div>
+      <div>
+        <h4>Graduate Mechanical Engineering Intern</h4>
+        <div class="org">OCP Group</div>
+        <p>Root cause analysis of critical line failures, SolidWorks and ANSYS modelling of the heat recovery tower, and a shell replacement procedure that OCP validated and carried out, raising line availability by 15%.</p>
+        <a href="projects/ocp.html" class="more">READ THE PROJECT &#8594;</a>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="when">SEP 2021 &#8211; JUL 2023<span class="kind">EDUCATION</span></div>
+      <div>
+        <h4>MSc Mechanical Engineering: Maintenance and Quality</h4>
+        <div class="org">Polytechnic School of Agadir, Morocco</div>
+        <p>Thesis on the PS III sulphuric acid line, carried out at OCP Group. Modules in robotics, industrial maintenance, CMMS and quality management.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="when">JUN 2022 &#8211; AUG 2022<span class="kind">INDUSTRY</span></div>
+      <div>
+        <h4>Design &amp; Manufacturing Engineering Intern</h4>
+        <div class="org">ENSA Mechanical Laboratory</div>
+        <p>Reverse-engineered, redesigned and machined an educational torsion test bench; a graduated pulley replaced the external comparator and cut setup time by 80%.</p>
+        <a href="projects/torsion-bench.html" class="more">READ THE PROJECT &#8594;</a>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="when">SEP 2018 &#8211; JUL 2021<span class="kind">EDUCATION</span></div>
+      <div>
+        <h4>BSc Maritime Mechanical Engineering</h4>
+        <div class="org">Higher Institute of Maritime Fisheries, Morocco</div>
+        <p>Thesis: design and implementation of a PID temperature control system for a sardine canning cooking installation.</p>
+      </div>
+    </div>
+
+  </div>
+
 </main>
 
 <footer id="contact">
@@ -232,7 +310,7 @@
       <li><a href="mailto:abdelwakil55khamsi@gmail.com">EMAIL</a></li>
       <li><a href="https://linkedin.com/in/abdelwakil-khamsi/">LINKEDIN</a></li>
       <li><a href="https://github.com/Abdel-wakil">GITHUB</a></li>
-      <li><a href="resume.pdf?v=2">RESUME</a></li>
+      <li><a href="resume.pdf?v=3">RESUME</a></li>
     </ul>
   </div>
 </footer>

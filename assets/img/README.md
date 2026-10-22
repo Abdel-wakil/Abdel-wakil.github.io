@@ -23,3 +23,17 @@ Drop files in using these names and they'll slot into the existing placeholders 
 - `generative-design/` — generative design sheet metal part (mention)
 
 Once real files land in a folder, tell me and I'll wire up the corresponding `<img>`/`<video>` tags in place of the placeholders.
+
+## Looping CAD animations (exploded views, assembly)
+
+Use short, muted video loops rather than GIFs: an MP4 is typically 10-20x smaller than the same GIF and looks sharper.
+
+1. Export from Fusion 360 (Animation workspace → Publish Video) or SolidWorks (Animation Wizard → Explode/Collapse → Save Animation), around 1280x720, 5-10 s, ideally a seamless loop (explode then collapse).
+2. Put the files in `biped/anim/` as `exploded_full.mp4`, `exploded_leg.mp4`, `exploded_actuator.mp4`, plus a `.jpg` of the first frame with the same name (used as the poster). Aim for under ~4 MB each.
+3. Uncomment the `ASSEMBLY & EXPLODED VIEWS` block in `projects/biped.html`.
+
+Videos tagged `data-autoplay` play only while on screen (`assets/js/site.js`), so several clips on one page don't drain a laptop battery.
+
+## Gallery photos
+
+Phone photos are too heavy to serve directly. `biped/gallery/` keeps the originals; the page uses resized copies in `biped/gallery/web/` (1800 px, lightbox) and `biped/gallery/thumb/` (720 px, grid), with the EXIF rotation baked in.
