@@ -54,3 +54,11 @@ No hosting cost, no configuration beyond that.
 ## Adding a new project later
 
 Copy `projects/robotic-arm.html` as a template (it has the simplest structure), rename it, update the content, then add a new `<a class="card">` block to the grid in `index.html` pointing to it.
+
+## Tracking who opens the site
+
+Visit analytics run on [Umami Cloud](https://cloud.umami.is) (free, cookieless). Setup lives in `assets/js/analytics.js`; nothing is recorded until `UMAMI_WEBSITE_ID` is filled in.
+
+- **Personal links:** send each person `https://abdel-wakil.github.io/?ref=<tag>`, e.g. `?ref=acme-cto`. Their visits show up in Umami under that tag (Sessions / distinct ID): time, country/city, device, pages viewed, resume downloads, contact clicks. Later visits from the same browser stay tagged even without the `?ref`.
+- **Exclude yourself:** open the site once with `?notrack` on each of your browsers (`?track` re-enables).
+- **Limits:** ad blockers can block the script; location is IP-based (city level, a VPN shows the VPN's location); a forwarded link is attributed to the original tag.

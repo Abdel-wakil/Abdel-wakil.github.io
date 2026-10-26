@@ -12,7 +12,7 @@ Drop files in using these names and they'll slot into the existing placeholders 
 
 ## Folders
 
-- `biped/` — PiB bipedal robot
+- `biped/` — planar bipedal robot
 - `robotic-arm/` — 3D-printed robotic arm
 - `robot-control-design/` — 3-DOF manipulator dynamics & control
 - `ocp/` — OCP sulphuric acid line
